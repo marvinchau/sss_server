@@ -5,6 +5,9 @@ use Models\User_Model\User;
 use Models\Device_Model\Device;
 use Utilities\ErrorFactory;
 use Utilities\SSSException;
+use Models\DataObject\DeviceReport;
+use Models\DataObject\Position;
+use Controllers\ClientController;
 require_once '../autoload.php';
 
 $action = "";
@@ -50,6 +53,64 @@ switch($action)
 			}
 		}
 		break;
+		
+	// Student Features
+	case "regularReport":
+		
+		if(validate_input_param($params, array('id', 'datetime', 'batt', 'pos', 'signal', 'movement'))){
+			
+			
+			$pos = $params['pos'];
+			$batt = $params['batt'];
+			$signal = $params['signal'];
+			$movement = $params['movement'];
+			
+			
+			$report = new DeviceReport();
+			$pos = new Position();
+			$pos->setAtt($pos['att']);
+			$pos->setLat($pos['lat']);
+			$pos->setLng($pos['lng']);
+			$pos->setDateTime($pos['dt']);
+			
+
+			$report->setUserId($params['id']);
+			$report->setPosition($pos);
+			$report->setBatt($batt);
+			$report->setSignal($signal);
+			$report->setMovement($movement);
+			
+			$ctr = new ClientController();
+			try{
+				$result = $ctr->regularReport($report);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+			
+			
+		}
+		
+		break;
+	// Teacher Features
+	case "getClasses":
+		
+		$ctr = new ClientController();
+		try{
+			$result = $ctr->getClasses();
+		}catch(SSSException $e){
+			$result = ErrorFactory::getError($e->getCode());
+		}
+		break;
+	case "getClassStudents":
+		if(validate_input_param($params, array('classId'))){
+			try{
+				$result = $ctr->getClassStudents($params['classId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+		
 	default:
 		$result = ErrorFactory::getError(ErrorFactory::ERR_INVALID_ACTION);
 		break;

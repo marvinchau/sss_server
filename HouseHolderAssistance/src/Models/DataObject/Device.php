@@ -1,6 +1,6 @@
 <?php
 
-namespace Models\Device_Model;
+namespace Models\DataObject;
 
 class Device{
 	
