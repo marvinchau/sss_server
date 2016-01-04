@@ -8,6 +8,8 @@ use Utilities\SSSException;
 use Models\DataObject\DeviceReport;
 use Models\DataObject\Position;
 use Controllers\ClientController;
+use Controllers\SafetyPlaceController;
+use Models\DataObject\Place;
 require_once '../autoload.php';
 
 $action = "";
@@ -102,6 +104,8 @@ switch($action)
 		}
 		break;
 	case "getClassStudents":
+
+		$ctr = new ClientController();
 		if(validate_input_param($params, array('classId'))){
 			try{
 				$result = $ctr->getClassStudents($params['classId']);
@@ -109,6 +113,27 @@ switch($action)
 				$result = ErrorFactory::getError($e->getCode());
 			}
 		}
+		break;
+	// Parent Features
+	case "setSafetyPlace":
+
+		$ctr = new ClientController();
+		if(validate_input_param($params, array('studentId', 'lat', 'lng', 'radius'))){
+			try{
+				
+				$place = new Place();
+				$place->setStudentId($params['studentId']);
+				$place->setLat($params['lat']);
+				$place->setLng($params['lng']);
+				$place->setRadius($params['radius']);
+				
+				$result = $ctr->setSafetyPlace($place);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+			
+		}
+		
 		break;
 		
 	default:
