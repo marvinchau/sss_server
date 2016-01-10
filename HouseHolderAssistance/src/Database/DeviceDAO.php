@@ -11,7 +11,7 @@ use Database\DBHandler\SDMDBParameters;
 use Database\BasicDAO;
 use Models\User_Model\User;
 use Utilities\SSSException;
-use Models\Device_Model\Device;
+use Models\DataObject\Device;
 
 class DeviceDAO extends BasicDAO
 {
@@ -24,7 +24,7 @@ class DeviceDAO extends BasicDAO
 		$params->add($device->getId());
 		$params->add($device->getWifiMacAddress());
 		$params->add($device->getUserId());
-		var_dump($params);
+// 		var_dump($params);
 		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
 // 		var_dump($result);
 		

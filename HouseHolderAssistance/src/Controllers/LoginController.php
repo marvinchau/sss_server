@@ -7,7 +7,7 @@ use Database\DAOFactory;
 use Entities\AWSData;
 use Entities\UserData;
 use Models\User_Model\User;
-use Models\Device_Model\Device;
+use Models\DataObject\Device;
 use Models\User_Model\UserModel;
 use Models\Device_Model\DeviceModel;
 use Utilities\ErrorFactory;
@@ -30,7 +30,7 @@ class LoginController
 		
 		//Insert User Device record
 		$deviceMod = new DeviceModel();
-		$device->setUserId($userId);
+		$device->setUserId($user->getId());
 		$isRecorded = $deviceMod->set($device);
 		
 		//Update User Device Fail
@@ -40,6 +40,7 @@ class LoginController
 		
 // 		$ret['data']['userID'] = $userId;
 		$ret['result'] = "success";
+		$ret['data']['user_id'] = $user->getId();
 		return $ret;
 	}
 }

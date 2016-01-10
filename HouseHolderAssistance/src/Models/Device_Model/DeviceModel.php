@@ -3,6 +3,7 @@
 namespace Models\Device_Model;
 
 use Database\DAOFactory;
+use Models\DataObject\Device;
 class DeviceModel{
 	
 	private $dao;

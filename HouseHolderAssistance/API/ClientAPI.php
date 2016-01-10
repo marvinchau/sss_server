@@ -2,7 +2,7 @@
 
 use Controllers\LoginController;
 use Models\User_Model\User;
-use Models\Device_Model\Device;
+use Models\DataObject\Device;
 use Utilities\ErrorFactory;
 use Utilities\SSSException;
 use Models\DataObject\DeviceReport;
