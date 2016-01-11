@@ -8,6 +8,8 @@ class Student{
 	private $userId;
 	private $studentId;
 	private $classId;
+	private $report;
+	private $device;
 	
 	public function getId(){
 		return $this->userId;
@@ -40,5 +42,22 @@ class Student{
 	public function setName($name){
 		$this->name = $name;
 	}
+	
+	public function getReport(){
+		return $this->report;
+	}
+	
+	public function setReport(DeviceReport $report){
+		$this->report = $report;
+	}
+	
+	public function getDevice(){
+		return $this->device;
+	}
+	
+	public function setDevice(Device $device){
+		$this->device = $device;
+	}
+	
 	
 }

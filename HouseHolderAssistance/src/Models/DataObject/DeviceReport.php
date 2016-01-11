@@ -11,6 +11,7 @@ class DeviceReport{
 	private $userId;
 	private $id;
 	private $movement;
+	private $gps;
 	
 	
 	public function getId(){
@@ -67,5 +68,13 @@ class DeviceReport{
 	
 	public function setMovement($movement){
 		$this->movement = $movement;
+	}
+	
+	public function getGPS(){
+		return $this->gps;
+	}
+	
+	public function setGPS($gpsStatus){
+		$this->gps = $gpsStatus;
 	}
 }
