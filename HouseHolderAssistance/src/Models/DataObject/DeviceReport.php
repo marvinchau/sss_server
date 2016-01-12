@@ -55,7 +55,7 @@ class DeviceReport{
 	}
 
 	public function getDateTime(){
-		return $datetime;
+		return $this->datetime;
 	}
 	
 	public function setDateTime($dt){

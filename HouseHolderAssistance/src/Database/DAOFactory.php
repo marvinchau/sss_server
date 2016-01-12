@@ -33,7 +33,7 @@ abstract class DAOFactory
 				$dao = new StudentDAO();
 				break;
 			case self::STUDENT_CLASS:
-				$dao = new SchoolClassDAO();
+				$dao = new StudentClassDAO();
 				break;
 			case self::SAFETY_PLACE:
 				$dao = new SafetyPlaceDAO();

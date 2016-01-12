@@ -3,7 +3,7 @@
 namespace Models\StudentClass_Model;
 
 use Database\DAOFactory;
-class StudentClass{
+class StudentClassModel{
 
 
 	private $dao;

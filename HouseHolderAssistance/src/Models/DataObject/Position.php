@@ -14,7 +14,7 @@ class Position{
 	private $isEnable;
 	
 	public function getLat(){
-		return $lat;
+		return $this->lat;
 	}
 	
 	public function setLat($lat){
@@ -22,7 +22,7 @@ class Position{
 	}
 	
 	public function getLng(){
-		return $lng;
+		return $this->lng;
 	}
 	
 	public function setLng($lng){
@@ -46,7 +46,7 @@ class Position{
 	}
 	
 	public function getDateTime(){
-		return $datetime;
+		return $this->datetime;
 	}
 	
 	public function setDateTime($dt){

@@ -66,28 +66,31 @@ switch($action)
 			$batt = $params['batt'];
 			$signal = $params['signal'];
 			$movement = $params['movement'];
+			$dt = $params['datetime'];
+
 			
 			
 			$report = new DeviceReport();
-			$pos = new Position();
-			$pos->setAtt($pos['att']);
-			$pos->setLat($pos['lat']);
-			$pos->setLng($pos['lng']);
-			$pos->setDateTime($pos['dt']);
-			
+			$p = new Position();
+			$p->setAtt($pos['att']);
+			$p->setLat($pos['lat']);
+			$p->setLng($pos['lng']);
+			$p->setDateTime($pos['dt']);
+			$p->setAccuracy($pos['acy']);
+// 			$p->setEnable($pos['gpsStatus']);
+// 			var_dump($p);
 
 			$report->setUserId($params['id']);
-			$report->setPosition($pos);
+			$report->setPosition($p);
 			$report->setBatt($batt);
 			$report->setSignal($signal);
 			$report->setMovement($movement);
-			
+			$report->setDateTime($dt);
+			$report->setGPS($pos['gpsStatus']);
+// 			var_dump($report);
+// 			var_dump($report->getPosition());
 			$ctr = new ClientController();
-			try{
-				$result = $ctr->regularReport($report);
-			}catch(SSSException $e){
-				$result = ErrorFactory::getError($e->getCode());
-			}
+			$result = $ctr->regularReport($report);
 			
 			
 		}
