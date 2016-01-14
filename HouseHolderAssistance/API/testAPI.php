@@ -15,3 +15,6 @@ $fakeParams = '{"action":"getParentStudents", "parentId":3}';
 
 // Get Class
 // $fakeParams = '{"action":"getClasses"}';
+
+// Set Place
+$fakeParams = '{"action":"setSafetyPlace","lat":22.33938444309968,"lng":114.16852042078972,"radius":149.4819793701172,"parentId":3}';

@@ -119,22 +119,18 @@ switch($action)
 		break;
 	// Parent Features
 	case "setSafetyPlace":
-
-		$ctr = new ClientController();
-		if(validate_input_param($params, array('studentId', 'lat', 'lng', 'radius'))){
+		if(validate_input_param($params, array('parentId', 'lat', 'lng', 'radius'))){
 			try{
-				
 				$place = new Place();
-				$place->setStudentId($params['studentId']);
+// 				$place->setStudentId($params['parentId']);
 				$place->setLat($params['lat']);
 				$place->setLng($params['lng']);
 				$place->setRadius($params['radius']);
-				
-				$result = $ctr->setSafetyPlace($place);
+				$ctr = new ClientController();
+				$result = $ctr->setSafetyPlace($place, $params['parentId']);
 			}catch(SSSException $e){
 				$result = ErrorFactory::getError($e->getCode());
 			}
-			
 		}
 		
 		break;

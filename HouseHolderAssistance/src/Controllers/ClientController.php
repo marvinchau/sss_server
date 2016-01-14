@@ -10,6 +10,8 @@ use Utilities\DataConvertor;
 use Utilities\SSSException;
 use Utilities\ErrorFactory;
 use Models\StudentClass_Model\StudentClassModel;
+use Models\SafetyPlace_Model\SafetyPlaceModel;
+use Models\DataObject\Place;
 class ClientController{
 	
 	public function regularReport(DeviceReport $report){
@@ -75,8 +77,21 @@ class ClientController{
 	}
 	
 
-	public function setSafetyPlace(Place $place){
-		//TODO:
+	public function setSafetyPlace(Place $place, $parentId){
+// 		var_dump($place);
+		$placeMod = new SafetyPlaceModel();
+		try{
+			$ret = $placeMod->set($place, $parentId);
+			if($ret == 1){
+				$result['result'] = "success";
+			}else{
+				$result['result'] = "fail";
+			}
+			return $result;
+			
+		}catch(SSSException $e){
+			return $e->getError();
+		}
 	}
 	
 	public function getParentStudents($parentId){

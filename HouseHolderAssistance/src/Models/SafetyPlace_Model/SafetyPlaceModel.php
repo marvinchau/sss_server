@@ -10,9 +10,12 @@ class SafetyPlaceModel{
 	
 	
 	public function __construct(){
-		$this->dao = DAOFactory::getDAO(DAOFactory::STUDENT_CLASS);
+		$this->dao = DAOFactory::getDAO(DAOFactory::SAFETY_PLACE);
 	}
 	
 	
-	public function set(Place $place){}
+	public function set(Place $place, $parentId){
+		return $this->dao->set($place, $parentId);
+		
+	}
 }

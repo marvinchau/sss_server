@@ -6,13 +6,13 @@ use Models\DataObject\Place;
 use Database\DBHandler\SDMDBParameters;
 class SafetyPlaceDAO extends BasicDAO{
 	
-	public function set(Place $place)
+	public function set(Place $place, $parentId)
 	{
 		$sp = "sp_place_set";
 	
 		$params = new SDMDBParameters();
 	
-		$params->add($place->getStudentId());
+		$params->add($parentId);
 		$params->add($place->getLat());
 		$params->add($place->getLng());
 		$params->add($place->getRadius());
