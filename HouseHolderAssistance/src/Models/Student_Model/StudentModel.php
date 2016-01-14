@@ -17,6 +17,9 @@ class StudentModel{
 		return $this->dao->getWithStatusByClassId($classId);
 	}
 	
+	public function getWithStatusByParentId($parentId){
+		return $this->dao->getWithStatusByParentId($parentId);
+	}
 	
 	
 	

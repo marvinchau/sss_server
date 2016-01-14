@@ -79,4 +79,22 @@ class ClientController{
 		//TODO:
 	}
 	
+	public function getParentStudents($parentId){
+		$studentMod = new StudentModel();
+		try{
+
+			$students = $studentMod->getWithStatusByParentId($parentId);
+			// 			var_dump($students);
+			if($students === FALSE){
+				$ret['data']['student'] = array();
+			}else{
+				$ret['data']['student'] = DataConvertor::objectArrayToArray($students);
+			}
+			$ret['result'] = "success";
+			return $ret;
+		}catch(SSSException $e){
+			return $e->getError();
+		}
+	}
+	
 }

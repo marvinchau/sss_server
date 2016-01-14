@@ -138,6 +138,19 @@ switch($action)
 		}
 		
 		break;
+	case "getParentStudents":
+		$ctr = new ClientController();
+		if(validate_input_param($params, array('parentId'))){
+			try{
+				
+				$result = $ctr->getParentStudents($params['parentId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+			
+		}
+		break;
+		
 		
 	default:
 		$result = ErrorFactory::getError(ErrorFactory::ERR_INVALID_ACTION);
