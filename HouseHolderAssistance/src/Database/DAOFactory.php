@@ -14,6 +14,7 @@ abstract class DAOFactory
 	const STUDENT = 4;
 	const STUDENT_CLASS = 5;
 	const SAFETY_PLACE = 6;
+	const NOTIFICATION = 7;
 
 	public static function getDAO($selDao)
 	{
@@ -37,6 +38,9 @@ abstract class DAOFactory
 				break;
 			case self::SAFETY_PLACE:
 				$dao = new SafetyPlaceDAO();
+				break;
+			case self::NOTIFICATION:
+				$dao = new NotificationDAO();
 				break;
 		}
 		return $dao;

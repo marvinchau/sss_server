@@ -29,6 +29,7 @@ class DeviceReportDAO extends BasicDAO{
 		$params->add($pos->getAccuracy());
 		$params->add($pos->getAtt());
 		$params->add($pos->getDateTime());
+		$params->add($report->getPlaceStatus());
 // 		var_dump($params);
 // 		echo "<BR>";
 		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');

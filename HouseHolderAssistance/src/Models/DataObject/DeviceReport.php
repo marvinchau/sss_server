@@ -12,6 +12,7 @@ class DeviceReport{
 	private $id;
 	private $movement;
 	private $gps;
+	private $placeStatus;
 	
 	
 	public function getId(){
@@ -76,5 +77,18 @@ class DeviceReport{
 	
 	public function setGPS($gpsStatus){
 		$this->gps = $gpsStatus;
+	}
+	
+	public function getPlaceStatus(){
+		return $this->placeStatus;
+	}
+	
+	/**
+	 * 1 mean school, 2 mean home, 3 mean out of area
+	 * @param int $placeStatus
+	 */
+	
+	public function setPlaceStatus($placeStatus){
+		$this->placeStatus = $placeStatus;
 	}
 }
