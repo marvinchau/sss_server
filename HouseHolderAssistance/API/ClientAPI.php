@@ -97,6 +97,16 @@ switch($action)
 		}
 		
 		break;
+	case "submitPanic":
+		$ctr = new ClientController();
+		if(validate_input_param($params, array('userId'))){
+			try{
+				$result = $ctr->submitPanic($params['userId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
 	// Teacher Features
 	case "getClasses":
 		

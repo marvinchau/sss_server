@@ -127,6 +127,35 @@ class ClientController{
 	}
 	
 	
+	public function submitPanic($userId){
+		
+		$notifiMod = new NotificationModel();
+		$studMod = new StudentModel();
+		$student = null;
+		try{
+			$student = $studMod->getStudent($userId);
+			
+// 			var_dump($student);
+			
+			$date = new \DateTime();
+			
+			$notification = new Notification();
+			$notification->setEventDt($date->format(DATETIME_FORMAT));
+			$notification->setProirity(1);
+			$notification->setType("Panic");
+			$notification->setStatus("P");
+			$notification->setUserId($userId);
+			$notification->setMsg("Student : " . $student->getName() . " In Class : " . $student->getClassName() . " - Student call help");
+			$notifiMod->addNotification($notification);
+
+			$result['result'] = "success";
+			
+		}catch(SSSException $e){
+			$result = ErrorFactory::getError($e->getCode());
+		}
+		return $result;
+	}
+	
 	//For Teacher
 	
 	public function initClassStudentsView($classId){
