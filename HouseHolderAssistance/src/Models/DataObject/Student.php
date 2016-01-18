@@ -10,6 +10,7 @@ class Student{
 	private $classId;
 	private $report;
 	private $device;
+	private $className;
 	
 	public function getId(){
 		return $this->userId;
@@ -59,5 +60,12 @@ class Student{
 		$this->device = $device;
 	}
 	
+	public function getClassName(){
+		return $this->className;
+	}
+	
+	public function setClassName($name){
+		$this->className = $name;
+	}
 	
 }

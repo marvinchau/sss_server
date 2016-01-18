@@ -18,16 +18,16 @@ class LocationModel{
 	 */
 	
 	
-	public function isInArea($areaLat, $areaLng, $radius, $targetLat, $targetLng){
+	public function isInArea($lat1, $lon1, $radius, $lat2, $lon2){
 		
-		$theta = $lon1 - $lon2;
-		$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-		$dist = acos($dist);
-		$dist = rad2deg($dist);
-		$miles = $dist * 60 * 1.1515;
-		$unit = strtoupper($unit);
-		
-		if($miles <= $radius)
+
+		  $theta = $lon1 - $lon2;
+		  $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+		  $dist = acos($dist);
+		  $dist = rad2deg($dist);
+		  $miles = $dist * 60 * 1.1515;
+		  $meter = $miles * 1609.344;
+		if($meter  <= $radius)
 		{
 			return true;
 		}		

@@ -15,16 +15,10 @@ use Models\DataObject\Place;
 use Models\Location_Model\LocationModel;
 use Models\Notification_Model\NotificationModel;
 use Models\DataObject\Notification;
+use Database\StudentDAO;
 class ClientController{
 	
-	//aabb0011
-	//abab0011
-	//aabb1100
-	//0101aabb
-	//abab1100
-	//abab0101
-	//abab1010
-	
+	//aabb0000
 	
 	public function regularReport(DeviceReport $report){
 		
@@ -34,6 +28,7 @@ class ClientController{
 		$placeMod = new SafetyPlaceModel();
 		$notiMod = new NotificationModel();
 		$dReportMod = new DeviceReportModel();
+		$studMod = new StudentModel();
 		
 		
 		$userId = $report->getUserId();
@@ -93,6 +88,9 @@ class ClientController{
 			// Add notification if place status changed
 			if($report->getPlaceStatus() != $placeStatus){
 				
+				
+				$student = $studMod->getStudent($userId);
+								
 				$notification = new Notification();
 				$notification->setEventDt($report->getDateTime());
 				$notification->setProirity(2);
@@ -102,13 +100,13 @@ class ClientController{
 				
 				switch ($report->getPlaceStatus()){
 					case 1:
-						$notification->setMsg("Student ID : " . $userId . "Student in school now");
+						$notification->setMsg("Student : " . $student->getName() . " In Class : " .$student->getClassName()   . " - Student in school now");
 						break;
 					case 2:
-						$notification->setMsg("Student ID : " . $userId . "Student in home now");
+						$notification->setMsg("Student : " . $student->getName() . " In Class : " .$student->getClassName()   . " - Student in home now");
 						break;
 					case 3:
-						$notification->setMsg("Student ID : " . $userId . "Student exit safety place");
+						$notification->setMsg("Student : " . $student->getName() . " In Class : " .$student->getClassName()   . " - Student exit safety place");
 						break;
 				}
 				$notiMod->addNotification($notification);
@@ -199,6 +197,24 @@ class ClientController{
 				$ret['data']['student'] = array();
 			}else{
 				$ret['data']['student'] = DataConvertor::objectArrayToArray($students);
+			}
+			$ret['result'] = "success";
+			return $ret;
+		}catch(SSSException $e){
+			return $e->getError();
+		}
+	}
+	
+	public function getStudent($studentId){
+		$studentMod = new StudentModel();
+		try{
+
+			$student = $studentMod->getStudentWithStatus($studentId);
+			// 			var_dump($students);
+			if($student === FALSE){
+				$ret['data']['student'] = null;
+			}else{
+				$ret['data']['student'] = DataConvertor::objectToArray($student);
 			}
 			$ret['result'] = "success";
 			return $ret;

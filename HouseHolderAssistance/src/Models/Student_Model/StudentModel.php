@@ -3,9 +3,15 @@
 namespace Models\Student_Model;
 
 use Database\DAOFactory;
+use Database\StudentDAO;
 class StudentModel{
 	
 
+	/**
+	 * 
+	 * @var StudentDAO $dao
+	 */
+	
 	private $dao;
 	
 	
@@ -21,6 +27,12 @@ class StudentModel{
 		return $this->dao->getWithStatusByParentId($parentId);
 	}
 	
+	public function getStudent($sUserId){
+		return $this->dao->get($sUserId);
+	}
 	
+	public function getStudentWithStatus($sUserId){
+		return $this->dao->getWithStatus($sUserId);
+	}
 	
 }

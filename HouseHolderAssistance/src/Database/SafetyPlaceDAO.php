@@ -83,17 +83,16 @@ class SafetyPlaceDAO extends BasicDAO{
 		$params->add("SCHOOL_PLACE");
 		
 		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
-		// 		var_dump($result);
+// 				var_dump($result);
 		
 		$ret = false;
 		
 		if($result && $result['response']['system']['errorNo'] == 0){
 			if(isset($result['response']['resultSet'])){
-				if(isset($result['response']['resultSet'])){
+				if(isset($result['response']['resultSet'][0])){
 						
-					$itemJson = $result['response']['resultSet'];
-					
-					$item = json_decode($itemJson, true);
+					$itemJson = $result['response']['resultSet'][0];
+					$item = json_decode($itemJson['system_setting_value'], true);
 					
 					$place = new Place();
 // 					$place->setAddress($item['address']);

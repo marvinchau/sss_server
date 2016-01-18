@@ -10,6 +10,7 @@ use Models\DataObject\Position;
 use Controllers\ClientController;
 use Controllers\SafetyPlaceController;
 use Models\DataObject\Place;
+use Models\Location_Model\LocationModel;
 require_once '../autoload.php';
 
 $action = "";
@@ -146,7 +147,20 @@ switch($action)
 			
 		}
 		break;
-		
+	case "getStudent":
+		$ctr = new ClientController();
+		if(validate_input_param($params, array('userId'))){
+			try{
+				$result = $ctr->getStudent($params['userId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+// 	case "testInArea":
+// 		$mod = new LocationModel();
+// 		var_dump($mod->isInArea(22.3393844431, 114.16852042079, 149.48197937012, 22.3205163, 114.2111383));
+// 		break;
 		
 	default:
 		$result = ErrorFactory::getError(ErrorFactory::ERR_INVALID_ACTION);
