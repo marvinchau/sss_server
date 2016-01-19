@@ -18,4 +18,8 @@ class NotificationModel{
 	public function addNotification(Notification $notification){
 		return $this->dao->add($notification);
 	}
+	
+	public function getNotifications($userId){
+		return $this->dao->getAll($userId);
+	}
 }

@@ -49,7 +49,7 @@ class NotificationDAO extends BasicDAO{
 		// 		var_dump($params);
 		
 		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
-		// 		var_dump($result);
+// 				var_dump($result);
 		$ret = false;
 		
 		if($result && $result['response']['system']['errorNo'] == 0){

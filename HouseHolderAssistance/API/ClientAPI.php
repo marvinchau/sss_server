@@ -1,16 +1,15 @@
 <?php
 
+use Controllers\ClientController;
 use Controllers\LoginController;
-use Models\User_Model\User;
 use Models\DataObject\Device;
+use Models\DataObject\DeviceReport;
+use Models\DataObject\Place;
+use Models\DataObject\Position;
+use Models\Location_Model\LocationModel;
+use Models\User_Model\User;
 use Utilities\ErrorFactory;
 use Utilities\SSSException;
-use Models\DataObject\DeviceReport;
-use Models\DataObject\Position;
-use Controllers\ClientController;
-use Controllers\SafetyPlaceController;
-use Models\DataObject\Place;
-use Models\Location_Model\LocationModel;
 require_once '../autoload.php';
 
 $action = "";
@@ -157,11 +156,31 @@ switch($action)
 			
 		}
 		break;
+	case "submitAttendence":
+		$ctr = new ClientController();
+		//TODO:
+		
+		
+		
+		
+		break;
+		
+	// For both Parent and Teacher
 	case "getStudent":
 		$ctr = new ClientController();
 		if(validate_input_param($params, array('userId'))){
 			try{
 				$result = $ctr->getStudent($params['userId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+	case "getNotifications":
+		$ctr = new ClientController();
+		if(validate_input_param($params, array('userId'))){
+			try{
+				$result = $ctr->getNotifications($params['userId']);
 			}catch(SSSException $e){
 				$result = ErrorFactory::getError($e->getCode());
 			}

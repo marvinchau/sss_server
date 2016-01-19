@@ -16,6 +16,8 @@ use Models\Location_Model\LocationModel;
 use Models\Notification_Model\NotificationModel;
 use Models\DataObject\Notification;
 use Database\StudentDAO;
+use Models\DataObject\Attendence;
+use Models\Attendence_Model\AttendenceModel;
 class ClientController{
 	
 	//aabb0000
@@ -124,6 +126,24 @@ class ClientController{
 		}
 		return $result;
 		
+	}
+	
+	public function getNotifications($userId){
+		
+		$notifiMod = new NotificationModel();
+		$notifications = null;
+		try{
+			$notifications = $notifiMod->getNotifications($userId);
+			if($notifications === FALSE){
+				$result['data']['notifications'] = array();
+			}else{	
+				$result['data']['notifications'] = DataConvertor::objectArrayToArray($notifications);
+			}
+			$result['result'] = "success";
+		}catch(SSSException $e){
+			$result = ErrorFactory::getError($e->getCode());
+		}
+		return $result;
 	}
 	
 	
@@ -251,5 +271,23 @@ class ClientController{
 			return $e->getError();
 		}
 	}
+	
+	/**
+	 * @param array Attendence $attends
+	 */
+	
+	public function submitAttendences(array $attends){
+		$attendMod = new AttendenceModel();
+		try{
+			
+			foreach($attends as $attend){
+				$attendMod->add($attend);
+			}
+			return $ret['result'] = "success";
+		}catch(SSSException $e){
+			return $e->getError();
+		}
+	}
+	
 	
 }

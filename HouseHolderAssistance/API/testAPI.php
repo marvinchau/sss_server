@@ -25,7 +25,11 @@
 // $fakeParams = '{"action":"getStudent", "userId":1}';
 
 // Submit Panic
-$fakeParams = '{"action":"submitPanic", "userId":1}';
+// $fakeParams = '{"action":"submitPanic", "userId":1}';
+
+// Get Notification
+$fakeParams = '{"action":"getNotifications", "userId":2}';
+
 
 
 // Test Inout Model
