@@ -289,5 +289,84 @@ class ClientController{
 		}
 	}
 	
+	//////////////////// Group Functions ////////////////////
+	
+// 	public function getGroupObservee($observerId)
+// 	{
+
+// 		$studentMod = new StudentModel();
+// 		try{
+// 			$students = $studentMod->getWithStatusByObserverId($observerId);
+// 			// 			var_dump($students);
+// 			if($students === FALSE){
+// 				$ret['data']['student'] = array();
+// 			}else{
+// 				$ret['data']['student'] = DataConvertor::objectArrayToArray($students);
+// 			}
+// 			$ret['result'] = "success";
+// 			return $ret;
+// 		}catch(SSSException $e){
+		
+// 			return $e->getError();
+// 		}
+// 	}
+	
+	
+	///////////////// Place Functions ///////////////////
+	
+	public function addPlace(Place $place)
+	{
+		$placeMod = new SafetyPlaceModel();
+		try{
+			$ret['data']['placeId'] = $placeMod->add($place);
+			$ret['result'] = "success";
+			return $ret;
+		}catch(SSSException $e){
+			return $e->getError();
+		}
+	}
+	
+
+	public function updatePlace(Place $place)
+	{
+		$placeMod = new SafetyPlaceModel();
+		try{
+			$placeMod->update($place);
+			$ret['result'] = "success";
+			return $ret;
+		}catch(SSSException $e){
+			return $e->getError();
+		}
+	}
+	
+	public function removePlace($placeId)
+	{
+		$placeMod = new SafetyPlaceModel();
+		try{
+			$placeMod->remove($placeId);
+			$ret['result'] = "success";
+			return $ret;
+		}catch(SSSException $e){
+			return $e->getError();
+		}		
+	}
+	
+	public function getPlacesByObserveeId($observeeId)
+	{
+		$placeMod = new SafetyPlaceModel();
+		try{
+			$places = $placeMod->getAll($observeeId);
+// 			var_dump($places);
+			if(is_array($places)){
+				$ret['data']['places'] = DataConvertor::objectArrayToArray($places);
+			}else{
+				$ret['data']['places'] = array();
+			}
+			$ret['result'] = "success";
+			return $ret;
+		}catch(SSSException $e){
+			return $e->getError();
+		}
+	}
 	
 }

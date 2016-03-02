@@ -191,6 +191,85 @@ switch($action)
 // 		var_dump($mod->isInArea(22.3393844431, 114.16852042079, 149.48197937012, 22.3205163, 114.2111383));
 // 		break;
 		
+	case "getGroupObservee":
+		if(validate_input_param($params, array('userId')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				$result = $ctr->getGroupObservee($params['userId']);
+			}
+			catch(SSSException $e)
+			{
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+		
+		
+	case "addCheckPoint":
+		if(validate_input_param($params, array('userId', 'placeName', 'lat', 'lng', 'radius')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				$place = new Place();
+				$place->setStudentId($params['userId']);
+				$place->setAddress($params['placeName']);
+				$place->setLat($params['lat']);
+				$place->setLng($params['lng']);
+				$place->setRadius($params['radius']);
+				$result = $ctr->addPlace($place);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());				
+			}
+		}
+		
+		break;
+	case "updateCheckPoint":
+		if(validate_input_param($params, array('placeId', 'placeName', 'lat', 'lng', 'radius')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				$place = new Place();
+				$place->setId($params['placeId']);
+				$place->setAddress($params['placeName']);
+				$place->setLat($params['lat']);
+				$place->setLng($params['lng']);
+				$place->setRadius($params['radius']);
+// 				var_dump($place);
+				$result = $ctr->updatePlace($place);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());				
+			}
+		}
+		break;
+	case "removeCheckPoint":
+		if(validate_input_param($params, array('placeId')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				$result = $ctr->removePlace($params['placeId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());				
+			}
+		}
+		break;
+	case "getCheckPoint":
+		if(validate_input_param($params, array('observeeId')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				$result = $ctr->getPlacesByObserveeId($params['observeeId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());				
+			}
+		}
+		break;
+		
 	default:
 		$result = ErrorFactory::getError(ErrorFactory::ERR_INVALID_ACTION);
 		break;

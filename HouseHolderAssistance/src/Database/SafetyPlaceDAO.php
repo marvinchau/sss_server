@@ -43,7 +43,7 @@ class SafetyPlaceDAO extends BasicDAO{
 		
 		$params = new SDMDBParameters();
 		
-		$params->add($studentId);
+		$params->add($sUserId);
 		
 		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
 		// 		var_dump($result);
@@ -67,7 +67,7 @@ class SafetyPlaceDAO extends BasicDAO{
 				}else{
 					throw new SSSException(ErrorFactory::ERR_DB_INVALID_RESULT);
 				}
-			}else {;
+			}else {
 				$ret = false;
 			}
 		} else {
@@ -147,4 +147,155 @@ class SafetyPlaceDAO extends BasicDAO{
 		}
 		return $ret;
 	}
+	
+	
+	/////////////////////////////////////////////////
+	
+	public function add(Place $place)
+	{
+
+		$sp = "sp_place_add";
+
+// 						var_dump($place);
+		$params = new SDMDBParameters();
+		$params->add($place->getStudentId());
+		$params->add($place->getAddress());
+		$params->add($place->getLat());
+		$params->add($place->getLng());
+		$params->add($place->getRadius());
+		
+		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
+// 						var_dump($result);
+		
+		$ret = false;
+		
+		if($result && $result['response']['system']['errorNo'] == 0){
+			if(isset($result['response']['resultSet'])){
+				if(isset($result['response']['resultSet'][0]['result'])){
+		
+					$ret = $result['response']['resultSet'][0]['result'];
+// 					print $ret;
+				}else{
+					throw new SSSException(ErrorFactory::ERR_DB_INVALID_RESULT);
+				}
+			}else {
+				$ret = false;
+			}
+		} else {
+			throw new SSSException(ErrorFactory::ERR_DB_EXECUTE);
+		}
+		return $ret;		
+	}
+	
+	public function update(Place $place)
+	{
+
+
+		$sp = "sp_place_update";
+
+// 		var_dump($place);
+		$params = new SDMDBParameters();
+		$params->add($place->getId());
+		$params->add($place->getAddress());
+		$params->add($place->getLat());
+		$params->add($place->getLng());
+		$params->add($place->getRadius());
+		var_dump($params);
+		
+		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
+// 						var_dump($result);
+		
+		$ret = false;
+		
+		if($result && $result['response']['system']['errorNo'] == 0){
+			if(isset($result['response']['resultSet'])){
+				$ret = true;
+// 				if(isset($result['response']['resultSet'])){
+		
+// 					$ret = $result['response']['resultSet'][0];
+		
+// 				}else{
+// 					throw new SSSException(ErrorFactory::ERR_DB_INVALID_RESULT);
+// 				}
+			}else {
+				$ret = false;
+			}
+		} else {
+			throw new SSSException(ErrorFactory::ERR_DB_EXECUTE);
+		}
+		return $ret;
+	}
+	
+
+	public function remove($placeId)
+	{
+	
+	
+		$sp = "sp_place_remove";
+	
+		$params = new SDMDBParameters();
+		$params->add($placeId);
+	
+		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
+		// 				var_dump($result);
+	
+		$ret = false;
+	
+		if($result && $result['response']['system']['errorNo'] == 0){
+			if(isset($result['response']['resultSet'])){
+				$ret = true;
+			}else {
+				$ret = false;
+			}
+		} else {
+			throw new SSSException(ErrorFactory::ERR_DB_EXECUTE);
+		}
+		return $ret;
+	}
+	
+
+	public function getAll($observeeId){
+		$sp = "sp_place_get";
+	
+		$params = new SDMDBParameters();
+	
+		$params->add($observeeId);
+	
+		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
+		// 		var_dump($result);
+	
+		$ret = false;
+	
+		if($result && $result['response']['system']['errorNo'] == 0){
+			if(isset($result['response']['resultSet'])){
+				if(isset($result['response']['resultSet'])){
+						
+					$items = $result['response']['resultSet'];
+					$places = array();
+					foreach($items as $item){
+// 						var_dump($item);
+						$place = new Place();
+						$place->setAddress($item['place_name']);
+						$place->setId($item['place_id']);
+						$place->setLat($item['latitude']);
+						$place->setLng($item['longitude']);
+						$place->setRadius($item['radius']);
+						$place->setStudentId($item['user_id']);
+						array_push($places, $place);
+					}
+					if(sizeof($places) > 0){
+						$ret = $places;
+					}	
+				}else{
+					throw new SSSException(ErrorFactory::ERR_DB_INVALID_RESULT);
+				}
+			}else {
+				$ret = false;
+			}
+		} else {
+			throw new SSSException(ErrorFactory::ERR_DB_EXECUTE);
+		}
+		return $ret;
+	}
+	
 }

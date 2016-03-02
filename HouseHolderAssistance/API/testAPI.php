@@ -24,13 +24,28 @@
 // Get Student
 // $fakeParams = '{"action":"getStudent", "userId":1}';
 
-// Submit Panic
-// $fakeParams = '{"action":"submitPanic", "userId":1}';
-
-// Get Notification
-$fakeParams = '{"action":"getNotifications", "userId":2}';
-
-
 
 // Test Inout Model
 // $fakeParams = '{"action":"testInArea"}';
+
+
+
+
+
+///////////////////////// Panic /////////////////////////////
+// Submit Panic
+// $fakeParams = '{"action":"submitPanic", "userId":1}';
+///////////////////////// Notification //////////////////////
+// Get Notification
+// $fakeParams = '{"action":"getNotifications", "userId":3}';
+//////////////////////  Place ///////////////////////
+// Add Place
+$fakeParams = '{"action":"addCheckPoint", "userId":"2", "placeName":"Home", "lat":22.33938444309968, "lng":114.16852042078972,"radius":149.4819793701172}';
+// Update Place
+// $fakeParams = '{"action":"updateCheckPoint", "placeId":"9", "placeName":"Home2", "lat":23.33938444309968, "lng":115.16852042078972,"radius":150.4819793701172}';
+// Remove Place
+// $fakeParams = '{"action":"removeCheckPoint", "placeId":9}';
+// Get Places
+// $fakeParams = '{"action":"getCheckPoint", "observeeId":8}';
+////////////////////////////////////////////////////////////
+
