@@ -35,11 +35,12 @@ switch($action)
 {
 	case "login":
 		
-		if(validate_input_param($params,array('id', 'type', 'password', 'deviceID', 'wifiMac' ))){
+		if(validate_input_param($params,array('name', 'type', 'password', 'deviceID', 'wifiMac' ))){
+// 		if(validate_input_param($params,array('id', 'type', 'password', 'deviceID', 'wifiMac' ))){
 			
 			$user = new User();
-// 			$user->setName($params['name']);
-			$user->setId($params['id']);
+			$user->setName($params['name']);
+// 			$user->setId($params['id']);
 			$user->setPassword(md5($params['password']));
 			$user->setType($params['type']);
 			
@@ -107,43 +108,43 @@ switch($action)
 		}
 		break;
 	// Teacher Features
-	case "getClasses":
+// 	case "getClasses":
 		
-		$ctr = new ClientController();
-		try{
-			$result = $ctr->getClasses();
-		}catch(SSSException $e){
-			$result = ErrorFactory::getError($e->getCode());
-		}
-		break;
-	case "getClassStudents":
+// 		$ctr = new ClientController();
+// 		try{
+// 			$result = $ctr->getClasses();
+// 		}catch(SSSException $e){
+// 			$result = ErrorFactory::getError($e->getCode());
+// 		}
+// 		break;
+// 	case "getClassStudents":
 
-		$ctr = new ClientController();
-		if(validate_input_param($params, array('classId'))){
-			try{
-				$result = $ctr->getClassStudents($params['classId']);
-			}catch(SSSException $e){
-				$result = ErrorFactory::getError($e->getCode());
-			}
-		}
-		break;
+// 		$ctr = new ClientController();
+// 		if(validate_input_param($params, array('classId'))){
+// 			try{
+// 				$result = $ctr->getClassStudents($params['classId']);
+// 			}catch(SSSException $e){
+// 				$result = ErrorFactory::getError($e->getCode());
+// 			}
+// 		}
+// 		break;
 	// Parent Features
-	case "setSafetyPlace":
-		if(validate_input_param($params, array('parentId', 'lat', 'lng', 'radius'))){
-			try{
-				$place = new Place();
-// 				$place->setStudentId($params['parentId']);
-				$place->setLat($params['lat']);
-				$place->setLng($params['lng']);
-				$place->setRadius($params['radius']);
-				$ctr = new ClientController();
-				$result = $ctr->setSafetyPlace($place, $params['parentId']);
-			}catch(SSSException $e){
-				$result = ErrorFactory::getError($e->getCode());
-			}
-		}
+// 	case "setSafetyPlace":
+// 		if(validate_input_param($params, array('parentId', 'lat', 'lng', 'radius'))){
+// 			try{
+// 				$place = new Place();
+// // 				$place->setStudentId($params['parentId']);
+// 				$place->setLat($params['lat']);
+// 				$place->setLng($params['lng']);
+// 				$place->setRadius($params['radius']);
+// 				$ctr = new ClientController();
+// 				$result = $ctr->setSafetyPlace($place, $params['parentId']);
+// 			}catch(SSSException $e){
+// 				$result = ErrorFactory::getError($e->getCode());
+// 			}
+// 		}
 		
-		break;
+// 		break;
 	case "getParentStudents":
 		$ctr = new ClientController();
 		if(validate_input_param($params, array('parentId'))){

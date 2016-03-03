@@ -56,7 +56,7 @@ class User{
 		return $this->lastUpdate;
 	}
 	
-	public function setLastUpdate(\DateTime $dt){
+	public function setLastUpdate($dt){
 		$this->lastUpdate = $dt;
 	}
 

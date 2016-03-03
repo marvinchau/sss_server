@@ -4,8 +4,14 @@ namespace Models\Device_Model;
 
 use Database\DAOFactory;
 use Models\DataObject\Device;
+use Database\DeviceDAO;
 class DeviceModel{
 	
+
+	/**
+	 * 
+	 * @var DeviceDAO $dao
+	 */
 	private $dao;
 	
 	

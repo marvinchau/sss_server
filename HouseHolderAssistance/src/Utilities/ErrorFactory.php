@@ -17,6 +17,9 @@ class ErrorFactory
 	const LOGIN_FAIL_INVALID_USER			= 1001;
 	const LOGIN_FAIL_DEVICE_UPDATE_FAIL		= 1002;
 	
+	const ERR_WRONG_USER_TYPE				= 2001;
+	const ERR_WRONG_USER_STATUS				= 2002;
+	
 	
 	public static function getError($selErr)
 	{
@@ -56,6 +59,13 @@ class ErrorFactory
 				break;
 			case self::LOGIN_FAIL_DEVICE_UPDATE_FAIL:
 				$json["err_msg"] = "Cannot update user device record";
+				break;
+			/******* User Fail *********/
+			case self::ERR_WRONG_USER_TYPE:
+				$json["err_msg"] = "Wrong User Type";
+				break;
+			case self::ERR_WRONG_USER_TYPE:
+				$json["err_msg"] = "Wrong User Status";
 				break;
 			default:
 				$json["err_msg"] = "Unknown Error";

@@ -35,8 +35,4 @@ class StudentModel{
 		return $this->dao->getWithStatus($sUserId);
 	}
 	
-	public function getWithStatusByObserverId($observerId){
-		return $this->dao->get
-	}
-	
 }

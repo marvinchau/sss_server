@@ -8,14 +8,15 @@ abstract class DAOFactory
 {
 	
 	
-	const USER = 1;
-	const DEVICE = 2;
+	const USER 			= 1;
+	const DEVICE 		= 2;
 	const DEVICE_REPORT = 3;
-	const STUDENT = 4;
+	const STUDENT 		= 4;
 	const STUDENT_CLASS = 5;
-	const SAFETY_PLACE = 6;
-	const NOTIFICATION = 7;
-	const ATTENDENCE = 8;
+	const SAFETY_PLACE 	= 6;
+	const NOTIFICATION 	= 7;
+	const ATTENDENCE 	= 8;
+	const GROUP			= 9;
 
 	public static function getDAO($selDao)
 	{
@@ -45,6 +46,9 @@ abstract class DAOFactory
 				break;
 			case self::ATTENDENCE:
 				$dao = new NotificationDAO();
+				break;
+			case self::GROUP:
+				$dao = new GroupDAO();
 				break;
 		}
 		return $dao;
