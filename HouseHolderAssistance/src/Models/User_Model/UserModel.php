@@ -36,6 +36,12 @@ class UserModel{
 		return $this->dao->updateStatus($user);
 	}
 	
+	/**
+	 * 
+	 * @param string $type
+	 * @return User
+	 */
+	
 	public function getByType($type)
 	{
 		return $this->dao->getByType($type);

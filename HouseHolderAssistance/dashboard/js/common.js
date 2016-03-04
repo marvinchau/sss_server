@@ -60,6 +60,29 @@ $.extend(
 		});
 	}
 });
+
+
+
+$.extend(
+{
+	requestPageContent: function(content_url, params, successCallback, failCallback)
+	{
+		$.ajax({
+			url: 		content_url,
+			type: 		"POST",
+			dataType: 	"html",
+			data:		params,
+			success:	function(data) {
+				successCallback(data);
+			},
+			error:		function(data) {
+				failCallback(data);
+			}
+		});
+	}
+}		
+);
+
 //
 //$.extend({
 //	closeWindow: function() {

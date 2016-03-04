@@ -58,7 +58,7 @@
 //Update User Status
 // $fakeParams = '{"action":"updateUserStatus", "userId":"10", "status":"N"}';
 //Get User by Type
-// $fakeParams = '{"action":"getUsers", "type":"A"}';
+$fakeParams = '{"action":"getUsers", "type":"P"}';
 //Get Group Observees by Observer Id
 // $fakeParams = '{"action":"getGroupObservees", "userId":"2"}';
 //Update Group Observees

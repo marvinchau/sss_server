@@ -9,7 +9,8 @@ define('ONE_MIN', 60);
 
 
 
-include_once '../src/Utilities/Utilities.php';
+// include_once '../src/Utilities/Utilities.php';
+require_once __DIR__ . '/../../src/Utilities/Utilities.php';
 
 $platform = 'develop';
 

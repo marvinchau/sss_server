@@ -8,6 +8,14 @@ if(!isset($_SESSION['userId'])){
 	exit();
 }
 
+$content = './pages/layout/ObserverManagement.php';
+// if(isset($_POST['content']))
+// {
+// 	$content = $_POST['content'];
+// }
+
+
+// $sideBar = 
 
 ?>
 
@@ -129,91 +137,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </header>
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
-
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
 
 
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
-            <li class="header">User Management</li>
-            <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Observer</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Observee</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Group</span></a></li>
-<!--             <li class="treeview"> -->
-<!--               <a href="#"><i class="fa fa-link"></i> <span>Group</span> <i class="fa fa-angle-left pull-right"></i></a> -->
-<!--               <ul class="treeview-menu"> -->
-<!--                 <li><a href="#">Link in level 2</a></li> -->
-<!--                 <li><a href="#">Link in level 2</a></li> -->
-<!--               </ul> -->
-<!--             </li> -->
-          </ul><!-- /.sidebar-menu -->
+            <li class="header">NAVIGATION</li>
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Observee</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="#" id="sidebar-observee-mgr"><i class="fa fa-circle-o"></i> Management</a></li>
+                <li><a href="#" id="sidebar-observee-add"><i class="fa fa-circle-o"></i> Add</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>Observer</span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Management</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Add</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Group</a></li>
+              </ul>
+            </li>
+          </ul>
         </section>
         <!-- /.sidebar -->
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Page Header
-            <small>Optional description</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-            <li class="active">Here</li>
-          </ol>
-        </section>
+      <div class="content-wrapper" id="page_content">
 
-        <!-- Main content -->
-        <section class="content">
-
-          <!-- Your Page Content Here -->
-		  <!-- Observer Management -->
-			<div class="row" style="display:none;">
-				<div class="col-xs-12">
-					<div class="box">
-						<div class="box-header">
-							<h3 class="box-title">Observee Table</h3>
-						</div>
-						<div class="box-body">
-							<table id="observeeTable" class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>Rendering engine</th>
-									<th>Browser</th>
-									<th>Platform(s)</th>
-									<th>Engine version</th>
-									<th>CSS grade</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-							<tfoot>
-								<tr>
-									<th>Rendering engine</th>
-									<th>Browser</th>
-									<th>Platform(s)</th>
-									<th>Engine version</th>
-									<th>CSS grade</th>
-								</tr>
-							</tfoot>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-        </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
       <!-- Main Footer -->
       <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-          Anything you want
+          Version 0.1
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="#">Generic Tracking System</a>.</strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->
@@ -283,7 +251,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script type="text/javascript"
+	src="./lib/js/jquery/jquery-1.11.3.min.js"></script>
+<!--     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script> -->
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
