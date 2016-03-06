@@ -165,7 +165,7 @@ class ClientController{
 			$notification->setType("Panic");
 			$notification->setStatus("P");
 			$notification->setUserId($userId);
-			$notification->setMsg("Student : " . $student->getName() . " In Class : " . $student->getClassName() . " - Student call help");
+			$notification->setMsg($student->getName() . " call help");
 			$notifiMod->addNotification($notification);
 
 			$result['result'] = "success";

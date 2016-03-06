@@ -4,9 +4,13 @@ namespace Models\Notification_Model;
 
 use Models\DataObject\Notification;
 use Database\DAOFactory;
+use Database\NotificationDAO;
 class NotificationModel{
 	
-
+	/**
+	 * 
+	 * @var NotificationDAO dao
+	 */
 	private $dao;
 	
 	

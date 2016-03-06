@@ -32,7 +32,7 @@
 // $fakeParams = '{"action":"login", "name":"teacher", "password":"mar123", "type":"P", "deviceID":"354360070115472", "wifiMac":"64:BC:0C:83:B2:E6"}';
 ///////////////////////// Panic /////////////////////////////
 // Submit Panic
-// $fakeParams = '{"action":"submitPanic", "userId":1}';
+// $fakeParams = '{"action":"submitPanic", "userId":26}';
 ///////////////////////// Notification //////////////////////
 // Get Notification
 // $fakeParams = '{"action":"getNotifications", "userId":3}';
@@ -47,7 +47,7 @@
 // $fakeParams = '{"action":"getCheckPoint", "observeeId":4}';
 ////////////////////////////////////////////////////////////
 //Submit attendance 
-$fakeParams = '{"action":"submitAttendance", "observerId":"2", "datetime":"2016-03-06 00:00:00", "attendRecords":[{"observeeId":1, "attend":true},{"observeeId":2, "attend":false}]}';
+// $fakeParams = '{"action":"submitAttendance", "observerId":"2", "datetime":"2016-03-06 00:00:00", "attendRecords":[{"observeeId":1, "attend":true},{"observeeId":2, "attend":false}]}';
 
 
 
@@ -66,6 +66,6 @@ $fakeParams = '{"action":"submitAttendance", "observerId":"2", "datetime":"2016-
 //Update Group Observees
 // $fakeParams = '{"action":"updateGroupObservees", "observerId":"2", "observeeIds":[1, 4, 6]}';
 //Get Location by Date and OBservee
-// $fakeParams = '{"action":"getObserveeLocationByDate", "observeeId":6, "date":"2016-03-04"}';
+$fakeParams = '{"action":"getObserveeLocationByDate", "observeeId":26, "date":"2016-03-07"}';
 
 

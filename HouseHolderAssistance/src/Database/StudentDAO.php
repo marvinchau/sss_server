@@ -25,17 +25,17 @@ class StudentDAO extends BasicDAO{
 		$params->add($userId);
 		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
 		$ret = false;
-		// 		var_dump($result);
+// 				var_dump($result);
 		if($result && $result['response']['system']['errorNo'] == 0){
 			if(isset($result['response']['resultSet'][0])){
 		
 				$dataRow = $result['response']['resultSet'][0];						
 				$student = new Student();
 				$student->setId($userId);
-				$student->setClassId($dataRow['class_id']);
+// 				$student->setClassId($dataRow['class_id']);
 				$student->setName($dataRow['login_name']);
 				$student->setStudentId($dataRow['student_id']);
-				$student->setClassName($dataRow['class_name']);
+// 				$student->setClassName($dataRow['class_name']);
 				$ret = $student;
 			}else {
 				$ret = false;
@@ -184,7 +184,7 @@ class StudentDAO extends BasicDAO{
 				foreach($result['response']['resultSet'] as $dataRow){
 						
 					$student = new Student();
-					$student->setClassId($dataRow['class_id']);
+// 					$student->setClassId($dataRow['class_id']);
 					$student->setId($dataRow['user_id']);
 					$student->setName($dataRow['login_name']);
 					$student->setStudentId($dataRow['student_id']);

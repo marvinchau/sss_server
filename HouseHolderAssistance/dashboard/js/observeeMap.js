@@ -3,6 +3,8 @@
  */
 var api_url = "../API/WebAPI.php";
 var map;
+var markers = [];
+var flightPath = null;
 
 $(document).ready(function() {
 
@@ -48,7 +50,7 @@ function drawMarkers(latlngs) {
 	// LatLng3,
 	// LatLng4,
 	// ];
-	var flightPath = new google.maps.Polyline({
+	flightPath = new google.maps.Polyline({
 		path : latlngs,
 		geodesic : true,
 		strokeColor : '#FF0000',
@@ -66,10 +68,19 @@ function drawMarkers(latlngs) {
 //		alert(i+1);
 		if(i==0){
 			addMarker(latlngs[i], map, "S");
+
+		    var center = new google.maps.LatLng(latlngs[i]['lat'], latlngs[i]['lng']);
+		    // using global variable:
+		    map.panTo(center);
 			
 		}else if(i == (latlngs.length -1)){
 
 			addMarker(latlngs[i], map, "E");
+//			alert(latlngs[i][lat]);
+
+		    var center = new google.maps.LatLng(latlngs[i]['lat'], latlngs[i]['lng']);
+		    // using global variable:
+		    map.panTo(center);
 		}
 //		else{
 //
@@ -82,7 +93,7 @@ function drawMarkers(latlngs) {
 function initMap() {
 
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom : 15,
+		zoom : 17,
 		center : {
 			lat : 22.3203589,
 			lng : 114.211341
@@ -123,6 +134,8 @@ function addMarker(location, mapA, label) {
 			map : mapA
 		});
 	}
+	
+	markers.push(marker);
 }
 
 function getObserveeLatLngs(userid, date) {
@@ -144,8 +157,13 @@ function getObserveeLatLngs(userid, date) {
 
 	$.requestAPI(api_url, params, function(data) {
 		if (data['result'] == "success") {
+				if(flightPath != null){
+					flightPath.setMap(null);
+				}
 			
-			
+			  for (var i = 0; i < markers.length; i++) {
+				    markers[i].setMap(null);
+				  }
 //			alert(JSON.stringify(data));
 //			alert(111);
 //			var latlng = {lat: 22.32046, lng: 114.2111681};
@@ -161,26 +179,32 @@ function getObserveeLatLngs(userid, date) {
 //				var latlng = {lat: 22.32046, lng: 114.2111681};
 //				addMarker(latlng, map, "" + (i+1));
 //			}
-			
-			var latlngs = [];
-			
-			$.each(data['data']['records'], function(index, value){
+//			alert(data['data'].records.length);
+//			alert(JSON.stringify(data));
+			if(data['data'].records.length > 0){
+				var latlngs = [];
 				
-				var lat = parseFloat(value['position']['lat']);
-				var lng = parseFloat(value['position']['lng']);
-//				alert(lat);
-//				alert(lng);
-				var latlng = {lat: lat,lng: lng};
-//				alert(JSON.stringify(latlng));
-				latlngs.push(latlng);
+				$.each(data['data']['records'], function(index, value){
+					
+					var lat = parseFloat(value['position']['lat']);
+					var lng = parseFloat(value['position']['lng']);
+	//				alert(lat);
+	//				alert(lng);
+					var latlng = {lat: lat,lng: lng};
+	//				alert(JSON.stringify(latlng));
+					latlngs.push(latlng);
+					
+	
+	//				addMarker(latlng, map, "" + (index+1));
+				});
 				
+	//			alert(JSON.stringify(latlngs));
+				drawMarkers(latlngs);
+	//			showCommonDialog("Success", "User add success");
+			}else{
 
-//				addMarker(latlng, map, "" + (index+1));
-			});
-			
-//			alert(JSON.stringify(latlngs));
-			drawMarkers(latlngs);
-//			showCommonDialog("Success", "User add success");
+				showCommonDialog("Warning", "No Location Record Found");
+			}
 
 		} else {
 			showCommonDialog("Warning", data['err_msg']);
