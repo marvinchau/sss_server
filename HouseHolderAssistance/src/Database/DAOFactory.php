@@ -45,7 +45,7 @@ abstract class DAOFactory
 				$dao = new NotificationDAO();
 				break;
 			case self::ATTENDENCE:
-				$dao = new NotificationDAO();
+				$dao = new AttendenceDAO();
 				break;
 			case self::GROUP:
 				$dao = new GroupDAO();

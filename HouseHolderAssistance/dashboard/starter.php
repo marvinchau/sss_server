@@ -8,7 +8,7 @@ if(!isset($_SESSION['userId'])){
 	exit();
 }
 
-$content = './pages/layout/ObserverManagement.php';
+$content = './pages/layout/observeeMgt.php';
 // if(isset($_POST['content']))
 // {
 // 	$content = $_POST['content'];
@@ -151,6 +151,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <ul class="treeview-menu">
                 <li class="active"><a href="#" id="sidebar-observee-mgr"><i class="fa fa-circle-o"></i> Management</a></li>
                 <li><a href="#" id="sidebar-observee-add"><i class="fa fa-circle-o"></i> Add</a></li>
+<!--                 <li><a href="#" id="sidebar-observee-map"><i class="fa fa-circle-o"></i> Location</a></li> -->
               </ul>
             </li>
             <li class="treeview">
@@ -159,9 +160,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <span>Observer</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Management</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Add</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Group</a></li>
+                <li><a href="#" id="sidebar-observer-mgr"><i class="fa fa-circle-o"></i> Management</a></li>
+                <li><a href="#" id="sidebar-observer-add"><i class="fa fa-circle-o"></i> Add</a></li>
+                <li><a href="#" id="sidebar-observer-grp"><i class="fa fa-circle-o"></i> Group</a></li>
               </ul>
             </li>
           </ul>

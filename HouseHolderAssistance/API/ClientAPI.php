@@ -10,6 +10,7 @@ use Models\Location_Model\LocationModel;
 use Models\User_Model\User;
 use Utilities\ErrorFactory;
 use Utilities\SSSException;
+use Models\DataObject\Attendence;
 require_once '../autoload.php';
 
 $action = "";
@@ -270,7 +271,37 @@ switch($action)
 			}
 		}
 		break;
-		
+	case "submitAttendance":
+// 		{"action":"submitAttendance", "observerId":"2", "datetime":"2016-03-06 00:00:00", "attendRecords":[{"observeeId":1, "attend":true},{"observeeId":2, "attend":false}]}';
+		if(validate_input_param($params, array('observerId', 'datetime', 'attendRecords')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				
+				$atts = $params['attendRecords'];
+				$attendances = array();
+				foreach($atts as $att){
+					$attendance = new Attendence();
+					$attendance->setTeacherUserId($params['observerId']);
+					$attendance->setSubmitDt($params['datetime']);
+					$attendance->setStudentUserId($att['observeeId']);
+					if($att['attend'] === true){
+						$attendance->setAttendence("T");
+					}else{
+
+						$attendance->setAttendence("F");
+					}
+					array_push($attendances, $attendance);
+				}
+				
+				$result = $ctr->addAttendences($attendances);
+// 				$result = $ctr->getPlacesByObserveeId($params['observeeId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
 	default:
 		$result = ErrorFactory::getError(ErrorFactory::ERR_INVALID_ACTION);
 		break;

@@ -133,6 +133,18 @@ switch($action)
 			}
 		}
 		break;
+	case "getObserveeLocationByDate":
+		if(validate_input_param($params,array('observeeId', 'date'))){
+		
+			$ctr = new WebController();
+			try{
+// 				$result = $ctr->updateGroupObservees($params['observerId'], $params['observeeIds']);
+				$result = $ctr->getObserveeLocationsByDate($params['observeeId'], $params['date']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
 	default:
 		$result = ErrorFactory::getError(ErrorFactory::ERR_INVALID_ACTION);
 		break;

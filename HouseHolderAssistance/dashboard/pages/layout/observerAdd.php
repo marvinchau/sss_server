@@ -1,13 +1,13 @@
 
 <html>
 <head>
-	<script type="text/javascript" src="./js/addObservee.js"></script>
+	<script type="text/javascript" src="./js/addObserver.js"></script>
 </head>
 <body>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Add Observee
+            Add Observer
 <!--             <small>Optional description</small> -->
         </h1>
 <!--         <ol class="breadcrumb"> -->
@@ -20,7 +20,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Observee Information</h3>
+						<h3 class="box-title">Observer Information</h3>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
@@ -36,7 +36,7 @@
 							<input id="confirmPassword" class="form-control" type="password" placeholder="Enter Confirm Password">
 						</div>
 						<div class="box-footer">
-							<button class="btn btn-primary" type="submit" id="submitAddObservee">Submit</button>
+							<button class="btn btn-primary" type="submit" id="submitAddObserver">Submit</button>
 						</div>
 					</div>
 				</div>

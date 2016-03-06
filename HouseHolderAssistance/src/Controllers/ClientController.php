@@ -369,4 +369,24 @@ class ClientController{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param Attendence[] $attendances
+	 */
+	public function addAttendences($attendances)
+	{
+
+		try{
+			$attMod = new AttendenceModel();
+			foreach($attendances as $attendance)
+			{
+				$attMod->add($attendance);
+			}
+			$ret['result'] = "success";
+			return $ret;
+		}catch(SSSException $e){
+			return $e->getError();
+		}
+	}
+	
 }

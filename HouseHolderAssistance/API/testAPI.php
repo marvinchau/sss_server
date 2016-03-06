@@ -46,6 +46,8 @@
 // Get Places
 // $fakeParams = '{"action":"getCheckPoint", "observeeId":4}';
 ////////////////////////////////////////////////////////////
+//Submit attendance 
+$fakeParams = '{"action":"submitAttendance", "observerId":"2", "datetime":"2016-03-06 00:00:00", "attendRecords":[{"observeeId":1, "attend":true},{"observeeId":2, "attend":false}]}';
 
 
 
@@ -58,10 +60,12 @@
 //Update User Status
 // $fakeParams = '{"action":"updateUserStatus", "userId":"10", "status":"N"}';
 //Get User by Type
-$fakeParams = '{"action":"getUsers", "type":"P"}';
+// $fakeParams = '{"action":"getUsers", "type":"P"}';
 //Get Group Observees by Observer Id
 // $fakeParams = '{"action":"getGroupObservees", "userId":"2"}';
 //Update Group Observees
 // $fakeParams = '{"action":"updateGroupObservees", "observerId":"2", "observeeIds":[1, 4, 6]}';
+//Get Location by Date and OBservee
+// $fakeParams = '{"action":"getObserveeLocationByDate", "observeeId":6, "date":"2016-03-04"}';
 
 

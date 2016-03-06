@@ -4,7 +4,9 @@ namespace Database;
 
 use Database\DBHandler\SDMDBParameters;
 use Models\DataObject\Attendence;
-class NotificationDAO extends BasicDAO{
+use Utilities\SSSException;
+use Utilities\ErrorFactory;
+class AttendenceDAO extends BasicDAO{
 	
 	
 	/**
@@ -17,12 +19,12 @@ class NotificationDAO extends BasicDAO{
 	public function add(Attendence $attend){
 		
 
-		$sp = "sp_attendence_add";
+		$sp = "sp_attendance_add";
 		
 		$params = new SDMDBParameters();
-		$params->add($attend->getClassId());
-		$params->add($attend->getStudentUserId());
+// 		$params->add($attend->getClassId());
 		$params->add($attend->getTeacherUserId());
+		$params->add($attend->getSubmitDt());
 		$params->add($attend->getStudentUserId());
 		$params->add($attend->isAttendence());
 // 		var_dump($params);

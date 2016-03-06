@@ -35,4 +35,9 @@ class StudentModel{
 		return $this->dao->getWithStatus($sUserId);
 	}
 	
+	public function getStudentLocationsByDate($userId, $date)
+	{
+		return $this->dao->getLocationsByDate($userId, $date);
+	}
+	
 }

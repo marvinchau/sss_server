@@ -8,6 +8,7 @@ use Utilities\ErrorFactory;
 use Models\User_Model\UserModel;
 use Utilities\DataConvertor;
 use Models\Group_Model\GroupModel;
+use Models\Student_Model\StudentModel;
 class WebController{
 	
 
@@ -111,5 +112,27 @@ class WebController{
 			return $e->getError();
 		}
 		
+	}
+	
+	public function getObserveeLocationsByDate($userId, $date)
+	{
+		try
+		{
+			$studMod = new StudentModel();
+			$deviceReports = $studMod->getStudentLocationsByDate($userId, $date);
+			if($deviceReports === FALSE)
+			{
+				return ErrorFactory::getError(ErrorFactory::ERR_RECORD_NOT_FOUND);
+			}else
+			{
+				$ret['result'] = 'success';
+				$ret['data']['records'] = DataConvertor::objectArrayToArray($deviceReports);
+				return $ret;
+			}
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
 	}
 }

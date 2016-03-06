@@ -3,8 +3,12 @@
  */
 var api_url = "../API/WebAPI.php";
 
-var content_observeeMgr = "./pages/layout/ObserverManagement.php";
-var content_observeeAdd = "./pages/layout/observerAdd.php";
+var content_observeeMgr = "./pages/layout/observeeMgt.php";
+var content_observeeAdd = "./pages/layout/observeeAdd.php";
+var content_observerMgr = "./pages/layout/observerMgt.php";
+var content_observerAdd = "./pages/layout/observerAdd.php";
+var content_observerGrp = "./pages/layout/observerGrp.php";
+var content_observeeMap = "./pages/layout/observeeMap.php";
 
 $(document).ready(function(){
 	
@@ -50,6 +54,67 @@ $(document).ready(function(){
 					$("#page_content").append("Page not found!!!");
 				});
 	});
+
+//	$("#sidebar-observee-map").click(function(){
+//		updateSideBar($(this));
+//		$.requestPageContent(
+//				content_observeeMap, 
+//				null,
+//				function(data){
+//					$("#page_content").empty();
+//					$("#page_content").append(data);
+//				},
+//				function(data){
+//					$("#page_content").append("Page not found!!!");
+//				});
+//	});
+	
+
+	$("#sidebar-observer-mgr").click(function(){
+		updateSideBar($(this));
+		$.requestPageContent(
+				content_observerMgr, 
+				null,
+				function(data){
+					$("#page_content").empty();
+					$("#page_content").append(data);
+				},
+				function(data){
+					$("#page_content").append("Page not found!!!");
+				});
+	});
+	
+
+	
+	$("#sidebar-observer-add").click(function(){
+		updateSideBar($(this));
+		$.requestPageContent(
+				content_observerAdd, 
+				null,
+				function(data){
+					$("#page_content").empty();
+					$("#page_content").append(data);
+				},
+				function(data){
+					$("#page_content").append("Page not found!!!");
+				});
+	});
+	
+	
+
+	$("#sidebar-observer-grp").click(function(){
+		updateSideBar($(this));
+		$.requestPageContent(
+				content_observerGrp, 
+				null,
+				function(data){
+					$("#page_content").empty();
+					$("#page_content").append(data);
+				},
+				function(data){
+					$("#page_content").append("Page not found!!!");
+				});
+	});
 });
 
 
@@ -61,34 +126,6 @@ function updateSideBar(obj){
 }
 
 function initObserveeList(content_url, params, sCallback, fCallback){
-	
-//	var params = {"params":'{"action":"getUsers", "type":"P"}'};
-//	var params = {
-//					"params"	:	'{	"action"		: "login", \
-//										"name"			: "'+user_name+'",\
-//										"type"			: "A",\
-//										"password"		: "'+pwd+'"}'
-//				 };
-//	$.requestAPI(api_url, 
-//				 params, 
-//				 function(data) {
-//					if (data['result'] == "success") {
-//						
-//						var items = data['data']['users'];
-//						
-//						$.each(items, function(i, item){
-//							
-//							$('')
-//						});
-//						
-//					} else {
-//						showCommonDialog("Warning", data['err_msg']);
-//					}
-//				 }, 
-//				 function(data){
-//					 showCommonDialog("Warning", "Incorrect login information!");
-//	});
-	
 	$.requestPageContent(content_url, 
 			 params,
 			 sCallback,

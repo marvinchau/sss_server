@@ -19,6 +19,7 @@ try{
 <?php if($pageLoaded){?>
 <html>
 <head>
+	<script type="text/javascript" src="./js/observeeMgt.js"></script>
 </head>
 <body>
     <!-- Content Header (Page header) -->
@@ -56,14 +57,17 @@ try{
 								{
 									$btnGrp = "";
 									
-									$tr = "<tr class='observee' id='".$observee->getId()."'>";
+									$tr = "<tr class='observee' userid='".$observee->getId()."' username='".$observee->getName()."'>";
 									$tr .= "<td>";
 									$tr .= $observee->getName();
 									$tr .= "</td>";
 									$tr .= "<td>";
 									if($observee->getStatus() == "N"){
 										$tr .= "Active";
-										$btnGrp .= 	"<td><button type='button' class='btn btn-default func-observee-inactive'>In-Active</button></td>";
+										$btnGrp .= 	"<td>";
+										$btnGrp .= 	"<button type='button' class='btn btn-default func-observee-location'>Location</button>";
+										$btnGrp .= 	"<button type='button' class='btn btn-default func-observee-inactive'>In-Active</button>";
+										$btnGrp .= 	"</td>";
 									}else{
 										$tr .= "In-active";
 										$btnGrp .= 	"<td><button type='button' class='btn btn-default func-observee-active'>Active</button></td>";
