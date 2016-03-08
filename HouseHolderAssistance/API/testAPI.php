@@ -35,16 +35,17 @@
 // $fakeParams = '{"action":"submitPanic", "userId":26}';
 ///////////////////////// Notification //////////////////////
 // Get Notification
-// $fakeParams = '{"action":"getNotifications", "userId":3}';
+$fakeParams = '{"action":"getNotifications", "userId":25}';
 //////////////////////  Place ///////////////////////
 // Add Place
 // $fakeParams = '{"action":"addCheckPoint", "userId":"2", "placeName":"Home", "lat":22.33938444309968, "lng":114.16852042078972,"radius":149.4819793701172}';
+// $fakeParams  = '{"action":"addCheckPoint","placeName":"","lat":22.332967743112608,"lng":114.17020551860332,"radius":149.4888153076172,"userId":26}';
 // Update Place
 // $fakeParams = '{"action":"updateCheckPoint", "placeId":"9", "placeName":"Home2", "lat":23.33938444309968, "lng":115.16852042078972,"radius":150.4819793701172}';
 // Remove Place
 // $fakeParams = '{"action":"removeCheckPoint", "placeId":9}';
 // Get Places
-// $fakeParams = '{"action":"getCheckPoint", "observeeId":4}';
+// $fakeParams = '{"action":"getCheckPoint", "observeeId":26}';
 ////////////////////////////////////////////////////////////
 //Submit attendance 
 // $fakeParams = '{"action":"submitAttendance", "observerId":"2", "datetime":"2016-03-06 00:00:00", "attendRecords":[{"observeeId":1, "attend":true},{"observeeId":2, "attend":false}]}';
@@ -66,6 +67,6 @@
 //Update Group Observees
 // $fakeParams = '{"action":"updateGroupObservees", "observerId":"2", "observeeIds":[1, 4, 6]}';
 //Get Location by Date and OBservee
-$fakeParams = '{"action":"getObserveeLocationByDate", "observeeId":26, "date":"2016-03-07"}';
+// $fakeParams = '{"action":"getObserveeLocationByDate", "observeeId":26, "date":"2016-03-07"}';
 
 

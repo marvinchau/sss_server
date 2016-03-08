@@ -4,7 +4,8 @@
 
 define('DB_DRIVER', 'mysql');
 
-define('DB_NAME', 'student_safety_system');
+// define('DB_NAME', 'student_safety_system');
+define('DB_NAME', 'generic_tracking_system');
 
 /** MySQL database username */
 define('DB_USER', 'marvin');

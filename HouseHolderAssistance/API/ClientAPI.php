@@ -210,8 +210,12 @@ switch($action)
 		
 		
 	case "addCheckPoint":
-		if(validate_input_param($params, array('userId', 'placeName', 'lat', 'lng', 'radius')))
-		{
+// 		var_dump($params);
+		if(validate_input_param($params, array('userId', 'placeName', 'lat', 'lng', 'radius'))){
+// 		if(validate_input_param($params, array('userId', 'placeName', 'lat', 'lng', 'radius')))
+// 		if(validate_input_param($params, array('radius')))
+// 		{
+// 			print 11111;
 			try
 			{
 				$ctr = new ClientController();

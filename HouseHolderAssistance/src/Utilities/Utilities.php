@@ -92,6 +92,7 @@ function validate_input_param($param, $accept_params){
 			$count++;
 		}
 	}
+// 	print $match .":" .$count;
 	
 	if($count == $match){
 		return true;

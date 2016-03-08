@@ -200,7 +200,7 @@ class SafetyPlaceDAO extends BasicDAO{
 		$params->add($place->getLat());
 		$params->add($place->getLng());
 		$params->add($place->getRadius());
-		var_dump($params);
+// 		var_dump($params);
 		
 		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
 // 						var_dump($result);
