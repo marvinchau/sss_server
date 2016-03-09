@@ -27,5 +27,15 @@ class AttendenceModel{
 		return $this->dao->add($attend);
 	}
 	
+	/**
+	 * 
+	 * @param int $observeeId
+	 * @param int $observerId
+	 * @return Attendence[]
+	 */
+	
+	public function getByObserveeIdAndObserverId($observeeId, $observerId){
+		return $this->dao->getByObserveeIdAndObserverId($observeeId, $observerId);
+	}
 	
 }

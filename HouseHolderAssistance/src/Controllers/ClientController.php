@@ -46,24 +46,25 @@ class ClientController{
 			$placeStatus = $placeMod->getLatestPlaceStatus($userId);
 			
 			
-			$place = $placeMod->getSchool();
-			if($place != null){
-				$inSchool = $locMod->isInArea(
-						$place->getLat(), 
-						$place->getLng(), 
-						$place->getRadius(), 
-						$report->getPosition()->getLat(),
-						$report->getPosition()->getLng()
-				);
+// 			$place = $placeMod->getSchool();
+// 			if($place != null){
+// 				$inSchool = $locMod->isInArea(
+// 						$place->getLat(), 
+// 						$place->getLng(), 
+// 						$place->getRadius(), 
+// 						$report->getPosition()->getLat(),
+// 						$report->getPosition()->getLng()
+// 				);
 				
-				if($inSchool){
-					$placeMatched = true;
-				}
-			}
+// 				if($inSchool){
+// 					$placeMatched = true;
+// 				}
+// 			}
 			
 			if(!$placeMatched){
-				
-				$p[] = $placeMod->get($userId);
+// 				print "user id :".$userId;
+				$p = $placeMod->get($userId);
+// 				var_dump($p);
 				foreach($p as $placeItem){
 					$inHome = $locMod->isInArea(
 							$placeItem->getLat(), 
@@ -72,6 +73,7 @@ class ClientController{
 							$report->getPosition()->getLat(),
 							$report->getPosition()->getLng()
 					);
+// 					print "inHome :" . $inHome;
 					if($inHome){
 						$placeMatched = true;
 						break;
@@ -80,16 +82,24 @@ class ClientController{
 			}
 			
 			if($placeMatched && $inSchool){
+// 				print "updated place status :" . 1;
 				$report->setPlaceStatus(1);
 			}else if($placeMatched && $inHome){
+// 				print "updated place status :" . 2;
 				$report->setPlaceStatus(2);
 			}else{
+// 				print "updated place status :" . 3;
 				$report->setPlaceStatus(3);
 			}
+			
+			
+// 			print 1111;
+// 			print "report place status : " . $report->getPlaceStatus() . " | place status in server : ". $placeStatus ;
 			
 			// Add notification if place status changed
 			if($report->getPlaceStatus() != $placeStatus){
 				
+// 				print 22222;
 				
 				$student = $studMod->getStudent($userId);
 								
@@ -102,18 +112,22 @@ class ClientController{
 				
 				switch ($report->getPlaceStatus()){
 					case 1:
-						$notification->setMsg("Student : " . $student->getName() . " In Class : " .$student->getClassName()   . " - Student in school now");
+						$notification->setMsg("Observee : " . $student->getName() . " - Student in school now");
 						break;
 					case 2:
-						$notification->setMsg("Student : " . $student->getName() . " In Class : " .$student->getClassName()   . " - Student in home now");
+						$notification->setMsg("Observee : " . $student->getName() . " - Check in to a check point");
 						break;
 					case 3:
-						$notification->setMsg("Student : " . $student->getName() . " In Class : " .$student->getClassName()   . " - Student exit safety place");
+						$notification->setMsg("Observee : " . $student->getName() . " - Check Out of Check point");
 						break;
 				}
+
+// 				print 33333;
 				$notiMod->addNotification($notification);
+// 				print 44444;
 			}
-			
+
+// 			print 55555;
 			//Add Device report
 			$res = $dReportMod->add($report);
 			if($res == 1){
@@ -376,6 +390,7 @@ class ClientController{
 	public function addAttendences($attendances)
 	{
 
+		
 		try{
 			$attMod = new AttendenceModel();
 			foreach($attendances as $attendance)
@@ -387,6 +402,35 @@ class ClientController{
 		}catch(SSSException $e){
 			return $e->getError();
 		}
+	}
+	
+	public function getAttendencesByObserveeIdAndObserverId($observeeId, $observerId)
+	{
+
+		try{
+			$attMod = new AttendenceModel();
+			$attends = $attMod->getByObserveeIdAndObserverId($observeeId, $observerId);
+			
+			$totalCheck = count($attends);
+			$totalAttend = 0;
+			foreach($attends as $attend){
+				if(strcmp($attend->isAttendence(), "T") == 0){
+					$totalAttend ++;
+				}
+			}
+			
+			$ret['data']['attendRecords'] = DataConvertor::objectArrayToArray($attends);
+			$ret['data']['totalCheck'] = $totalCheck;
+			$ret['data']['totalAttend'] = $totalAttend;
+			$ret['data']['attendPercentage'] = ($totalAttend / $totalCheck * 100 ) ."%";
+			
+			$ret['result'] = "success";
+			return $ret;
+		}catch(SSSException $e){
+			return $e->getError();
+		}
+		
+		
 	}
 	
 }

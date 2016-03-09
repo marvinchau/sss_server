@@ -56,7 +56,7 @@ class Attendence{
 	}
 	
 	public function setAttendence($isAttendence){
-		$this->isAttendence - $isAttendence;
+		$this->isAttendence = $isAttendence;
 	}
 	
 }

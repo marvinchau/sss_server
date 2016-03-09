@@ -12,6 +12,7 @@ class Notification{
 	private $msg;
 	private $last_update;
 	private $eventDt;
+	private $observeeId;
 	
 	public function getId(){
 		return $this->id;
@@ -75,5 +76,12 @@ class Notification{
 	
 	public function setEventDt($eventDt){
 		$this->eventDt = $eventDt;
+	}
+	public function getObserveeId(){
+		return $this->observeeId;
+	}
+	
+	public function setObserveeId($observeeId){
+		$this->observeeId = $observeeId;
 	}
 }

@@ -46,23 +46,31 @@ class SafetyPlaceDAO extends BasicDAO{
 		$params->add($sUserId);
 		
 		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
-		// 		var_dump($result);
+// 				var_dump($result);
 		
 		$ret = false;
 		
 		if($result && $result['response']['system']['errorNo'] == 0){
 			if(isset($result['response']['resultSet'])){
 				if(isset($result['response']['resultSet'])){
+
+					$items = $result['response']['resultSet'];
+					$places = array();
 					
-					$item = $result['response']['resultSet'];
-					$place = new Place();
-					$place->setAddress($item['address']);
-					$place->setId($item['id']);
-					$place->setLat($item['lat']);
-					$place->setLng($item['lng']);
-					$place->setRadius($item['radius']);
-					$place->setStudentId($item['studentId']);
-					$ret = $place;
+					foreach($items as $item){
+					
+						$place = new Place();
+						$place->setAddress($item['address']);
+						$place->setId($item['place_id']);
+						$place->setLat($item['latitude']);
+						$place->setLng($item['longitude']);
+						$place->setRadius($item['radius']);
+						$place->setStudentId($item['user_id']);
+						
+// 						$ret = $place;
+						array_push($places, $place);
+					}
+					$ret = $places;
 					
 				}else{
 					throw new SSSException(ErrorFactory::ERR_DB_INVALID_RESULT);

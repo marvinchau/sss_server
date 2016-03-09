@@ -158,14 +158,18 @@ switch($action)
 			
 		}
 		break;
-	case "submitAttendence":
-		$ctr = new ClientController();
-		//TODO:
-		
-		
-		
-		
-		break;
+// 	case "submitAttendence":
+// 		$ctr = new ClientController();
+// 		if(validate_input_param($params, array('parentId'))){
+// 			try{
+				
+// 				$result = $ctr->getParentStudents($params['parentId']);
+// 			}catch(SSSException $e){
+// 				$result = ErrorFactory::getError($e->getCode());
+// 			}
+			
+// 		}
+// 		break;
 		
 	// For both Parent and Teacher
 	case "getStudent":
@@ -290,17 +294,33 @@ switch($action)
 					$attendance->setTeacherUserId($params['observerId']);
 					$attendance->setSubmitDt($params['datetime']);
 					$attendance->setStudentUserId($att['observeeId']);
+					
+					
+// 					print "attend : " . $att['attend'];
 					if($att['attend'] === true){
+// 						print 1;
 						$attendance->setAttendence("T");
 					}else{
-
+// 						print 2;
 						$attendance->setAttendence("F");
 					}
 					array_push($attendances, $attendance);
 				}
 				
 				$result = $ctr->addAttendences($attendances);
-// 				$result = $ctr->getPlacesByObserveeId($params['observeeId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+	case "getAttendancesByObserveeAndObserverId":
+// 		'{"action":"getAttendancesByObserveeAndObserverId", "observeeId":26, "observerId":27}'
+		if(validate_input_param($params, array('observerId', 'observeeId')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				$result = $ctr->getAttendencesByObserveeIdAndObserverId($params['observeeId'], $params['observerId']);
 			}catch(SSSException $e){
 				$result = ErrorFactory::getError($e->getCode());
 			}

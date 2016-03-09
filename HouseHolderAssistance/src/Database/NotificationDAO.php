@@ -69,6 +69,7 @@ class NotificationDAO extends BasicDAO{
 						$notification->setMsg($dataRow['message']);
 						$notification->setEventDt($dataRow['event_dt']);
 						$notification->setLastUpate($dataRow['last_update']);
+						$notification->setObserveeId($dataRow['observee_id']);
 						array_push($notifications, $notification);
 					}
 					$ret = $notifications;
