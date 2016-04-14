@@ -293,6 +293,14 @@ class StudentDAO extends BasicDAO{
 		return $ret;
 	}
 	
+	/**
+	 * Get location by date
+	 * @param unknown $userId
+	 * @param unknown $date
+	 * @throws SSSException
+	 * @return array
+	 */
+	
 	public function getLocationsByDate($userId, $date)
 	{
 		$sp = "sp_student_location_getByDate";

@@ -145,6 +145,20 @@ switch($action)
 			}
 		}
 		break;
+	case "exportReport":
+// 		print 1;
+		if(validate_input_param($params,array('observeeId'))){
+// 			print 2;
+			$ctr = new WebController();
+			try{
+				// 				$result = $ctr->updateGroupObservees($params['observerId'], $params['observeeIds']);
+				$result = $ctr->exportObserveeLocationsByDate($params['observeeId'], date("Y-m-d H:i:s"));
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+// 		print 3;
+		break;
 	default:
 		$result = ErrorFactory::getError(ErrorFactory::ERR_INVALID_ACTION);
 		break;

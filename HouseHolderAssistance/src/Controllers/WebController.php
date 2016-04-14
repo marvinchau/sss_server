@@ -9,6 +9,7 @@ use Models\User_Model\UserModel;
 use Utilities\DataConvertor;
 use Models\Group_Model\GroupModel;
 use Models\Student_Model\StudentModel;
+use Models\CSV\CSVManager;
 class WebController{
 	
 
@@ -127,6 +128,37 @@ class WebController{
 			{
 				$ret['result'] = 'success';
 				$ret['data']['records'] = DataConvertor::objectArrayToArray($deviceReports);
+				return $ret;
+			}
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+	}
+
+	public function exportObserveeLocationsByDate($userId, $date)
+	{
+		try
+		{
+// 			print 1;
+			$studMod = new StudentModel();
+			$deviceReports = $studMod->getStudentLocationsByDate($userId, $date);
+			if($deviceReports === FALSE)
+			{
+// 				print 2;
+				return ErrorFactory::getError(ErrorFactory::ERR_RECORD_NOT_FOUND);
+			}else
+			{
+// 				print 3;
+				$ret['result'] = 'success';
+				$reportArray = DataConvertor::objectArrayToArray($deviceReports);
+				
+				$csvMgr = new CSVManager();
+// 				$filename = $csvMgr->genCSV("location", $reportArray);
+				$filename = $csvMgr->genCSV("location".$date.".csv", $reportArray);
+				$ret['result'] = 'success';
+				$ret['data'] = $filename;
 				return $ret;
 			}
 		}

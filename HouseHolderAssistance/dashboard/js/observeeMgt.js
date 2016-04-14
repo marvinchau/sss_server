@@ -42,9 +42,37 @@ $(document).ready(function(){
 		);
 
 	});
+	
+	$(".func-observee-export").click(function()
+	{
+		
+		var params = {
+				"params" : '{"action":"exportReport", \
+									"observeeId"			: "' + $(this).parent().parent().attr("userid")+ '"}'
+			};
+
+		$.requestAPI(api_url, params, function(data) {
+			if (data['result'] == "success") {
+//				alert("../API/"+data['data']);
+				downloadURI("../API/"+data['data'], data['data']);
+
+			} else {
+				showCommonDialog("Warning", data['err_msg']);
+			}
+		}, function(data) {
+			alert(JSON.stringify(data));
+			showCommonDialog("Warning", "Incorrect information!");
+		});
+	});
+
 });
 
-
+function downloadURI(uri, name) {
+	  var link = document.createElement("a");
+	  link.download = name;
+	  link.href = uri;
+	  link.click();
+	}
 
 function updateStatus(userID, status){
 

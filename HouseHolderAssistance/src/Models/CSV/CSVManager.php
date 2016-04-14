@@ -48,6 +48,11 @@ class CSVManager
 				$rowRecord = array();
 				foreach($dataset as $key => $value)
 				{
+					if(is_array($value))
+					{
+						$value = implode(",", $value);
+					}
+					
 					array_push($rowRecord, $value);
 
 				}

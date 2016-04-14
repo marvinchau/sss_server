@@ -67,6 +67,7 @@ try{
 										$btnGrp .= 	"<td>";
 										$btnGrp .= 	"<button type='button' class='btn btn-default func-observee-location'>Location</button>";
 										$btnGrp .= 	"<button type='button' class='btn btn-default func-observee-inactive'>In-Active</button>";
+										$btnGrp .= 	"<button type='button' class='btn btn-default func-observee-export'>CSV Report</button>";
 										$btnGrp .= 	"</td>";
 									}else{
 										$tr .= "In-active";

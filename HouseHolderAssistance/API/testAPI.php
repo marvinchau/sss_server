@@ -23,7 +23,7 @@
 // $fakeParams = '{"action":"regularReport","id":1,"datetime":"2016-01-12 16:17:14","batt":42,"signal":99,"pos":{"lat":22.320366,"lng":114.211284,"dt":"2016-01-12 16:16:42","acy":37.5,"att":0, "gpsStatus":1},"movement":3}';
 // $fakeParams = '{"id":1,"action":"regularReport","signal":99,"batt":20,"datetime":"2016-03-03 16:19:30","movement":-1,"pos":{"att":0,"dt":"2016-01-18 16:17:31","acy":42.5880012512207,"lng":114.2111699,"gpsStatus":1,"lat":22.3205339}}';
 // $fakeParams = '{"action":"regularReport","id":26,"datetime":"2016-03-09 13:27:40","batt":17,"signal":99,"pos":{"lat":22.3203413,"lng":114.2113523,"dt":"2016-03-09 13:25:42","acy":49.143001556396484,"att":0,"gpsStatus":1},"movement":-1}';
-$fakeParams = '{"action":"regularReport","id":26,"datetime":"2016-03-09 14:54:58","batt":84,"signal":99,"pos":{"lat":22.3202917,"lng":114.2113081,"dt":"2016-03-09 14:54:58","acy":100.13099670410156,"att":0,"gpsStatus":1},"movement":3}';
+// $fakeParams = '{"action":"regularReport","id":26,"datetime":"2016-03-09 14:54:58","batt":84,"signal":99,"pos":{"lat":22.3202917,"lng":114.2113081,"dt":"2016-03-09 14:54:58","acy":100.13099670410156,"att":0,"gpsStatus":1},"movement":3}';
 ////////////////////////// Observee ///////////////////////
 // Get Observees by observer ID
 //  $fakeParams = '{"action":"getParentStudents", "parentId":27}';
@@ -31,7 +31,7 @@ $fakeParams = '{"action":"regularReport","id":26,"datetime":"2016-03-09 14:54:58
 // $fakeParams = '{"action":"getStudent", "userId":4}';
 ///////////////////////// Login ///////////////////////////////
 //Login
-// $fakeParams = '{"action":"login", "name":"teacher", "password":"mar123", "type":"P", "deviceID":"354360070115472", "wifiMac":"64:BC:0C:83:B2:E6"}';
+// $fakeParams = '{"action":"login", "name":"testobserver1", "password":"mar123", "type":"P", "deviceID":"354360070115472", "wifiMac":"64:BC:0C:83:B2:E6"}';
 ///////////////////////// Panic /////////////////////////////
 // Submit Panic
 // $fakeParams = '{"action":"submitPanic", "userId":26}';
@@ -53,7 +53,7 @@ $fakeParams = '{"action":"regularReport","id":26,"datetime":"2016-03-09 14:54:58
 // $fakeParams = '{"action":"submitAttendance", "observerId":"2", "datetime":"2016-03-06 00:00:00", "attendRecords":[{"observeeId":1, "attend":true},{"observeeId":2, "attend":false}]}';
 // $fakeParams = '{"action":"submitAttendance","datetime":"2016-03-09 16:50:58","observerId":27,"attendRecords":[{"observeeId":4,"attend":true},{"observeeId":26,"attend":false}]}';
 //Get Attend Record
-$fakeParams = '{"action":"getAttendancesByObserveeAndObserverId", "observeeId":26, "observerId":27}';
+// $fakeParams = '{"action":"getAttendancesByObserveeAndObserverId", "observeeId":26, "observerId":27}';
 
 
 /////////////////////// Web API ////////////////////
@@ -71,5 +71,6 @@ $fakeParams = '{"action":"getAttendancesByObserveeAndObserverId", "observeeId":2
 // $fakeParams = '{"action":"updateGroupObservees", "observerId":"2", "observeeIds":[1, 4, 6]}';
 //Get Location by Date and OBservee
 // $fakeParams = '{"action":"getObserveeLocationByDate", "observeeId":26, "date":"2016-03-07"}';
+$fakeParams = '{"action":"exportReport", "observeeId":26, "date":"2016-03-07"}';
 
 
