@@ -54,6 +54,22 @@
 // $fakeParams = '{"action":"submitAttendance","datetime":"2016-03-09 16:50:58","observerId":27,"attendRecords":[{"observeeId":4,"attend":true},{"observeeId":26,"attend":false}]}';
 //Get Attend Record
 // $fakeParams = '{"action":"getAttendancesByObserveeAndObserverId", "observeeId":26, "observerId":27}';
+//Add Task
+// $fakeParams = '{"action":"addTask", "observerId":25, "typeId":1,"lat":22.332967743112608,"lng":114.17020551860332, "address":"cityu", "msg":"test message"}';
+//Get Task
+// $fakeParams = '{"action":"getTask", "taskId":1}';
+//getTasksByObserverAndDat
+$fakeParams = '{"action":"getTasksByObserverAndDate", "observerId":25, "date":"2016-04-15"}';
+//updateTask
+// $fakeParams = '{"action":"updateTask", "taskId":1, "typeId":1, "lat":2, "lng":2, "address":"tuen mun", "msg":"test 3"}';
+//updateTaskStatus
+// $fakeParams = '{"action":"updateTaskStatus", "taskId":1, "statusId":3}';
+//assignTask
+// $fakeParams = '{"action":"assignTask", "taskId":1, "handlerId":26}';
+//pickUpTask
+// $fakeParams = '{"action":"pickUpTask", "taskId":1, "handlerId":26}';
+//getTaskType
+// $fakeParams = '{"action":"getTaskTypes"}';
 
 
 /////////////////////// Web API ////////////////////
@@ -71,6 +87,6 @@
 // $fakeParams = '{"action":"updateGroupObservees", "observerId":"2", "observeeIds":[1, 4, 6]}';
 //Get Location by Date and OBservee
 // $fakeParams = '{"action":"getObserveeLocationByDate", "observeeId":26, "date":"2016-03-07"}';
-$fakeParams = '{"action":"exportReport", "observeeId":26, "date":"2016-03-07"}';
+// $fakeParams = '{"action":"exportReport", "observeeId":26, "date":"2016-03-07"}';
 
 

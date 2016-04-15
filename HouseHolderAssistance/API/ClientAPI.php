@@ -326,6 +326,128 @@ switch($action)
 			}
 		}
 		break;
+		
+	//Task Management
+	case "addTask":
+		if(validate_input_param($params, array('observerId', 'typeId', 'lat', 'lng', 'address', 'msg')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				
+				$result = $ctr->addTask(
+						$params['observerId'], 
+						$params['typeId'], 
+						$params['lat'], 
+						$params['lng'], 
+						$params['address'], 
+						$params['msg']
+				);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+	case "getTask":
+		if(validate_input_param($params, array('taskId')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				
+				$result = $ctr->getTask($params['taskId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+	case "getTasksByObserverAndDate":
+		if(validate_input_param($params, array('observerId', 'date')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				
+				$result = $ctr->getAllTaskByObserverAndDate($params['observerId'], $params['date']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+	case "updateTask":
+		if(validate_input_param($params, array('taskId','typeId', 'lat', 'lng', 'address', 'msg')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				
+				$result = $ctr->updateTask(
+						$params['taskId'], 
+						$params['typeId'], 
+						$params['lat'], 
+						$params['lng'], 
+						$params['address'], 
+						$params['msg']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+	case "updateTaskStatus":
+		if(validate_input_param($params, array('taskId','statusId')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				
+				$result = $ctr->updateTaskStatus(
+						$params['taskId'], 
+						$params['statusId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+	case "assignTask":
+		if(validate_input_param($params, array('taskId','handlerId')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				
+				$result = $ctr->assignTask(
+						$params['taskId'], 
+						$params['handlerId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+	case "pickUpTask":
+		if(validate_input_param($params, array('taskId','handlerId')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				
+				$result = $ctr->pickUpTask(
+						$params['taskId'], 
+						$params['handlerId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
+	case "getTaskTypes":
+		try
+		{
+			$ctr = new ClientController();
+			
+			$result = $ctr->getTaskType();
+		}catch(SSSException $e){
+			$result = ErrorFactory::getError($e->getCode());
+		}
+		break;
 	default:
 		$result = ErrorFactory::getError(ErrorFactory::ERR_INVALID_ACTION);
 		break;

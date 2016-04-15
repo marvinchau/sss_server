@@ -17,6 +17,7 @@ abstract class DAOFactory
 	const NOTIFICATION 	= 7;
 	const ATTENDENCE 	= 8;
 	const GROUP			= 9;
+	const TASK			= 10;
 
 	public static function getDAO($selDao)
 	{
@@ -49,6 +50,9 @@ abstract class DAOFactory
 				break;
 			case self::GROUP:
 				$dao = new GroupDAO();
+				break;
+			case self::TASK:
+				$dao = new TaskDAO();
 				break;
 		}
 		return $dao;

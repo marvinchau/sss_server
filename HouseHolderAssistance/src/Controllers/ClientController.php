@@ -18,6 +18,10 @@ use Models\DataObject\Notification;
 use Database\StudentDAO;
 use Models\DataObject\Attendence;
 use Models\Attendence_Model\AttendenceModel;
+use Models\Task_Model\TaskType;
+use Models\User_Model\User;
+use Models\Task_Model\Task;
+use Models\Task_Model\TaskModel;
 class ClientController{
 	
 	//aabb0000
@@ -432,5 +436,261 @@ class ClientController{
 		
 		
 	}
+
+	//Task Management
 	
+	public function addTask($observerId, $taskTypeId, $lat, $lng, $address, $msg)
+	{
+		try
+		{
+			// 			print 1;
+				
+			$type = new TaskType();
+			$type->setId($taskTypeId);
+				
+			$reporter = new User();
+			$reporter->setId($observerId);
+				
+			$task = new Task();
+			$task->setTaskType($type);
+			$task->setReport($reporter);
+			$task->setLat($lat);
+			$task->setLng($lng);
+			$task->setAddress($address);
+			$task->setMsg($msg);
+				
+			$taskMod = new TaskModel();
+			$result = $taskMod->add($task);
+			if($result === FALSE)
+			{
+				$ret['result'] = 'fail';
+			}else
+			{
+				// 				print 3;
+				$ret['result'] = 'success';
+			}
+			return $ret;
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+	}
+	
+	public function getTask($taskId)
+	{
+		try
+		{
+			$taskMod = new TaskModel();
+			$task = $taskMod->get($taskId);
+			if($result === FALSE)
+			{
+				$ret['result'] = 'fail';
+				
+			}else{
+
+				$ret['result'] = 'success';
+				$ret['data']['task'] = DataConvertor::objectToArray($task);
+			}
+			return $ret;
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+	}
+	
+	public function getAllTaskByObserverAndDate($observerId, $date)
+	{
+		try
+		{
+			$taskMod = new TaskModel();
+			$tasks = $taskMod->getAllByObserverIdAndDate($observerId, $date);
+			
+			
+			
+			if($tasks === FALSE)
+			{
+				$ret['result'] = 'fail';
+				
+			}else{
+
+				$totalTask = count($tasks);
+				$noOfCompleteTask = 0;
+				$noOfPendingTask = 0;
+				$noOfInProgressTask = 0;
+				$noOfCancelTask = 0;
+				
+				foreach($tasks as $task)
+				{
+					switch($task->getTaskStatus()->getId())
+					{
+						case 1:
+							$noOfPendingTask++;
+							break;
+						case 2:
+							$noOfCancelTask++;
+							break;
+						case 5:
+							$noOfCompleteTask++;
+							break;
+						default:
+							$noOfInProgressTask++;
+							break;
+						
+					}
+					
+				}
+				
+				
+				$ret['result'] = 'success';
+				$ret['data']['task'] = DataConvertor::objectArrayToArray($tasks);
+				$ret['data']['summary']['total'] = $totalTask;
+				$ret['data']['summary']['pending'] = $noOfPendingTask;
+				$ret['data']['summary']['cancel'] = $noOfCancelTask;
+				$ret['data']['summary']['inProgress'] = $noOfInProgressTask;
+				$ret['data']['summary']['completed'] = $noOfCompleteTask;
+			}
+			return $ret;
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+		
+	}
+	
+	public function updateTask($taskId, $typeId, $lat, $lng, $address, $msg)
+	{
+
+		try
+		{
+			
+			$taskType = new TaskType();
+			$taskType->setId($typeId);
+			
+			$task = new Task();
+			$task->setId($taskId);
+			$task->setTaskType($taskType);
+			$task->setLat($lat);
+			$task->setLng($lng);
+			$task->setAddress($address);
+			$task->setMsg($msg);
+			
+			$taskMod = new TaskModel();
+			$result = $taskMod->update($task);
+			if($result === FALSE)
+			{
+				$ret['result'] = 'fail';
+		
+			}else{
+		
+				$ret['result'] = 'success';
+			}
+			return $ret;
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+	}
+	
+	public function updateTaskStatus($taskId, $statusId)
+	{
+
+		try
+		{
+				
+			
+				
+			$taskMod = new TaskModel();
+			$result = $taskMod->updateStatus($taskId, $statusId);
+			if($result === FALSE)
+			{
+				$ret['result'] = 'fail';
+		
+			}else{
+		
+				$ret['result'] = 'success';
+			}
+			return $ret;
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+	}
+
+	public function assignTask($taskId, $handlerId)
+	{
+	
+		try
+		{
+	
+				
+	
+			$taskMod = new TaskModel();
+			$result = $taskMod->assign($taskId, $handlerId);
+			if($result === FALSE)
+			{
+				$ret['result'] = 'fail';
+	
+			}else{
+	
+				$ret['result'] = 'success';
+			}
+			return $ret;
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+	}
+
+	public function pickUpTask($taskId, $handlerId)
+	{
+	
+		try
+		{
+			$taskMod = new TaskModel();
+			$result = $taskMod->pickUp($taskId, $handlerId);
+			if($result === FALSE)
+			{
+				$ret['result'] = 'fail';
+	
+			}else{
+	
+				$ret['result'] = 'success';
+			}
+			return $ret;
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+	}
+	
+	public function getTaskType()
+	{
+
+		try
+		{
+			$taskMod = new TaskModel();
+			$result = $taskMod->getTypes();
+			if($result === FALSE)
+			{
+				$ret['result'] = 'fail';
+		
+			}else{
+		
+				$ret['result'] = 'success';
+				$ret['data']['types'] = DataConvertor::objectArrayToArray($result);
+			}
+			return $ret;
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+	}
 }
