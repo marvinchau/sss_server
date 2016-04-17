@@ -478,4 +478,83 @@ class TaskDAO extends BasicDAO
 		}
 		return $ret;
 	}
+	
+
+
+	/**
+	 * 
+	 * @param int $observeeId
+	 * @param string $date
+	 * @throws SSSException
+	 * @return Task[] | boolean
+	 */
+	
+	public function getAllTaskByObservee($observeeId){
+		$sp = "sp_task_getAllByObservee";
+	
+		$params = new SDMDBParameters();
+		$params->add($observeeId);
+// 				var_dump($params);
+	
+		$result = $this->handler->execute_stored_procedure($sp, $params, 'array');
+// 								var_dump($result);
+		$ret = false;
+	
+		if($result && $result['response']['system']['errorNo'] == 0){
+			if(isset($result['response']['resultSet'])){
+				if(isset($result['response']['resultSet'][0])){
+	
+					
+					$tasks = array();
+					$dataRows = $result['response']['resultSet'];
+					foreach($dataRows as $data){
+					
+							
+						$task = new Task();
+						$task->setId($data['id']);
+						$task->setLat($data['lat']);
+						$task->setLng($data['lng']);
+						$task->setAddress($data['address']);
+						$task->setMsg($data['msg']);
+						$task->setLastUpdate($data['lastUpdate']);
+						$task->setCreateDt($data['createDt']);
+							
+						$taskType = new TaskType();
+						$taskType->setId($data['typeId']);
+						$taskType->setName($data['taskType']);
+						$task->setTaskType($taskType);
+							
+						$taskStatus = new TaskStatus();
+						$taskStatus->setId($data['statusId']);
+						$taskStatus->setName($data['status']);
+						$task->setTaskStatus($taskStatus);
+							
+						$reporter = new User();
+						$reporter->setId($data['reporterId']);
+						$reporter->setName($data['reporter']);
+						$task->setReport($reporter);
+							
+						if(isset($data['handlerId'])){
+							$handler = new User();
+							$handler->setId($data['handlerId']);
+							$handler->setName($data['handler']);
+							$task->setHandler($handler);
+						}
+						array_push($tasks, $task);
+					}
+						
+					$ret = $tasks;
+						
+	
+				}else{
+					throw new SSSException(ErrorFactory::ERR_DB_INVALID_RESULT);
+				}
+			}else {
+				$ret = false;
+			}
+		} else {
+			throw new SSSException(ErrorFactory::ERR_DB_EXECUTE);
+		}
+		return $ret;
+	}
 }

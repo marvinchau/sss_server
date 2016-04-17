@@ -19,6 +19,7 @@ class DeviceModel{
 		$this->dao = DAOFactory::getDAO(DAOFactory::DEVICE);
 	}
 	public function set(Device $device){
+		
 		return $this->dao->set($device);
 	}
 }

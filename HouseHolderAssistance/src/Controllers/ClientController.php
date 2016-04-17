@@ -520,18 +520,34 @@ class ClientController{
 				$noOfPendingTask = 0;
 				$noOfInProgressTask = 0;
 				$noOfCancelTask = 0;
+				$noOfDelayCompletedTask = 0;
+				$noOfExpiredTask = 0;
 				
 				foreach($tasks as $task)
 				{
 					switch($task->getTaskStatus()->getId())
 					{
 						case 1:
+							
+// 							$createDt = $task->getCreateDt();
+							
+// 							if( get_datetime_distance($createDt, $date) < 0){
+// 								$noOfExpiredTask++;
+// 							}else{
+// 								$noOfPendingTask++;
+// 							}
 							$noOfPendingTask++;
 							break;
 						case 2:
 							$noOfCancelTask++;
 							break;
 						case 5:
+// 							if( get_datetime_distance($task->, $date) < 0){
+// 								$noOfExpiredTask++;
+// 							}else{
+// 								$noOfPendingTask++;
+// 							}
+							
 							$noOfCompleteTask++;
 							break;
 						default:
@@ -692,5 +708,34 @@ class ClientController{
 		{
 			return $e->getError();
 		}
+	}
+	
+	
+
+	public function getAllTaskByObservee($observeeId)
+	{
+		try
+		{
+			$taskMod = new TaskModel();
+			$tasks = $taskMod->getAllByObserveeId($observeeId);
+				
+				
+				
+			if($tasks === FALSE)
+			{
+				$ret['result'] = 'fail';
+	
+			}else{
+	
+				$ret['result'] = 'success';
+				$ret['data']['task'] = DataConvertor::objectArrayToArray($tasks);
+			}
+			return $ret;
+		}
+		catch(SSSException $e)
+		{
+			return $e->getError();
+		}
+	
 	}
 }

@@ -448,6 +448,19 @@ switch($action)
 			$result = ErrorFactory::getError($e->getCode());
 		}
 		break;
+	case "getTasksByObservee":
+		if(validate_input_param($params, array('observeeId')))
+		{
+			try
+			{
+				$ctr = new ClientController();
+				
+				$result = $ctr->getAllTaskByObservee($params['observeeId']);
+			}catch(SSSException $e){
+				$result = ErrorFactory::getError($e->getCode());
+			}
+		}
+		break;
 	default:
 		$result = ErrorFactory::getError(ErrorFactory::ERR_INVALID_ACTION);
 		break;

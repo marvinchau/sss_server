@@ -31,7 +31,7 @@
 // $fakeParams = '{"action":"getStudent", "userId":4}';
 ///////////////////////// Login ///////////////////////////////
 //Login
-// $fakeParams = '{"action":"login", "name":"testobserver1", "password":"mar123", "type":"P", "deviceID":"354360070115472", "wifiMac":"64:BC:0C:83:B2:E6"}';
+// $fakeParams = '{"action":"login", "name":"testobserver1", "password":"mar123", "type":"O", "deviceID":"354360070115472", "wifiMac":"64:BC:0C:83:B2:E6"}';
 ///////////////////////// Panic /////////////////////////////
 // Submit Panic
 // $fakeParams = '{"action":"submitPanic", "userId":26}';
@@ -57,9 +57,10 @@
 //Add Task
 // $fakeParams = '{"action":"addTask", "observerId":25, "typeId":1,"lat":22.332967743112608,"lng":114.17020551860332, "address":"cityu", "msg":"test message"}';
 //Get Task
-// $fakeParams = '{"action":"getTask", "taskId":1}';
+$fakeParams = '{"action":"getTask", "taskId":1}';
 //getTasksByObserverAndDat
-$fakeParams = '{"action":"getTasksByObserverAndDate", "observerId":25, "date":"2016-04-15"}';
+// $fakeParams = '{"action":"getTasksByObserverAndDate", "observerId":27, "date":"2016-04-15"}';
+// $fakeParams = '{"action":"getTasksByObserverAndDate","date":"2016-04-16","observerId":25}';
 //updateTask
 // $fakeParams = '{"action":"updateTask", "taskId":1, "typeId":1, "lat":2, "lng":2, "address":"tuen mun", "msg":"test 3"}';
 //updateTaskStatus
@@ -70,7 +71,8 @@ $fakeParams = '{"action":"getTasksByObserverAndDate", "observerId":25, "date":"2
 // $fakeParams = '{"action":"pickUpTask", "taskId":1, "handlerId":26}';
 //getTaskType
 // $fakeParams = '{"action":"getTaskTypes"}';
-
+//getTasksByObservee
+// $fakeParams = '{"action":"getTasksByObservee", "observeeId":26}';
 
 /////////////////////// Web API ////////////////////
 //Login

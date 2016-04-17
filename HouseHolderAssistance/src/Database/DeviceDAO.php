@@ -17,6 +17,7 @@ class DeviceDAO extends BasicDAO
 {
 	public function set(Device $device)
 	{
+		
 		$sp = "sp_device_set";
 		
 		$params = new SDMDBParameters();

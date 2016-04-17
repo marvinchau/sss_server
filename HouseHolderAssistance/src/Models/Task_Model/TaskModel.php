@@ -116,4 +116,16 @@ class TaskModel{
 	{
 		return $this->dao->getTaskType();
 	}
+	
+	/**
+	 *
+	 * @param int $observeeId
+	 * @throws SSSException
+	 * @return Task[] | boolean
+	 */
+	
+	public function getAllByObserveeId($observeeId)
+	{
+		return $this->dao->getAllTaskByObservee($observeeId);
+	}
 }
